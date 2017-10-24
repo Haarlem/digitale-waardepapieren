@@ -13,7 +13,6 @@
     "node": "7.10.0"
   },
   "dependencies": {
-    "iota.lib.js": "0.4.1",
-    "mam.client.js": "0.2.3"
+    "iota.lib.js": "0.4.2"
   }
 }

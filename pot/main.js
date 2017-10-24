@@ -1,10 +1,12 @@
+var Mam = require('./lib/mam.node.js');
 const IOTA = require('iota.lib.js');
 
-console.log("Hello PoT");
+
+console.log("Hello Haarlem IOTA MAM PoT");
 
 // Create IOTA instance directly with provider
 var iota = new IOTA({
-    'provider': '<your node ip:port>'
+    'provider': 'http://p103.iotaledger.net:14700/'
 });
 
 // now you can start using all of the functions
@@ -16,51 +18,41 @@ var iota = new IOTA({
 //    }
 //})
 
-var Crypto = require('iota.crypto.js');
-const MAM = require('./node_modules/mam.client.js/lib/mam');
-const MerkleTree = require('./node_modules/mam.client.js/lib/merkle');
-const Encryption = require('./node_modules/mam.client.js/lib/encryption');
+const example = async () => {
+  // Init State
+  let state = Mam.init(iota)
+  // Create Message one
+  console.log('Creating MAM payload - HELLO')
+  var message1 = Mam.create(state, 'HELLO')
+  state = message1.state
+  console.log('Root: ', message1.root)
+  // Attach that message
+  await Mam.attach(message1.payload, message1.root)
 
+  // Create Message Two
+  console.log('Creating MAM payload ATTEST')
+  var message2 = Mam.create(state, 'ATTEST')
+  state = message2.state
+  console.log('Root: ', message2.root)
+  // Attach that message
+  await Mam.attach(message2.payload, message2.root)
 
-const seed = 'PFVHAVVYJPLRYXSWVHFQTFYPWLARUSGQJYHZLHNUHHAPNSHPKKQUFLUNUAREUKLSNXPEVFBNGXVXZWCKD';
-const message = "Hello from Haarlem - Waardepapieren test channel";
-const channelKeyIndex = 5;
-const channelKey = Crypto.converter.trytes(Encryption.hash(Encryption.increment(Crypto.converter.trits(seed.slice()))));
-const start = 5;
-const count = 6;
-const security = 1;
+  // Create Message Two
+  console.log('Creating MAM payload ATTEST')
+  var message3 = Mam.create(state, 'ATTEST')
+  state = message3.state
+  console.log('Root: ', message3.root)
+  // Attach that message
+  await Mam.attach(message3.payload, message3.root)
 
-const tree0 = new MerkleTree(seed, start, count, security);
-const tree1 = new MerkleTree(seed, start + count, count, security);
-let index = 0;
+  state = Mam.subscribe(state, message1.root)
 
-console.log("creating MAM channel root message:"+message);
-console.log("Channel key: "+channelKey);
+  // Fetch data starting from root one!
+  var listener = Mam.listen(state.subscribed[message1.root], logData)
+  // console.log(listener)
+  // setTimeout(() => clearInterval(listener), 20000)
+}
 
-// Get the trytes of the MAM transactions
-const mam = new MAM.create({
-    message: iota.utils.toTrytes(message),
-    merkleTree: tree0,
-    index: index,
-    nextRoot: tree1.root.hash.toString(),
-    channelKey: channelKey,
-});
+const logData = data => console.log(data)
 
-// Depth
-const depth = 4;
-
-// minWeighMagnitude
-const minWeightMagnitude = 9;
-
-console.log("Next Key: " + mam.nextKey);
-
-// Send trytes
-
-iota.api.sendTrytes(mam.trytes, depth, minWeightMagnitude, (err, tx) => {
-  if (err)
-    console.log(err);
-  else {
-    console.log(tx);
-    console.log("message sent.");
-  }
-});
+example()
