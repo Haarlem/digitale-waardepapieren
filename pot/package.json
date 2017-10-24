@@ -1,0 +1,19 @@
+{
+  "name": "PoT",
+  "version": "1.0.0",
+  "description": "Proof of Technology : IOTA MAM",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Bas Kaptijn",
+  "license": "GPLv3",
+  "engines": {
+    "node": "7.10.0"
+  },
+  "dependencies": {
+    "iota.lib.js": "0.4.1",
+    "mam.client.js": "0.2.3"
+  }
+}

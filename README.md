@@ -1,1 +1,3 @@
-# Digitale waardepapieren
+# Digitale Waardepapieren
+
+pot : proof of technology tests
