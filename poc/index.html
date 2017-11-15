@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Waardepapieren POC - ICTU iov Gemeente Haarlem</title>
+  </head>
+  <body style="font: 10pt Verdana">
+    <h1>Waardepapieren POC</h1>
+    <p>De waardepapieren oplossing bestaat uit een (gemeentelijke) website met achterliggende webservice en verifier app. Burgers vragen na inloggen met DigID bij
+       de website een uittreksel aan, verkrijgen de gegegevens hiervoor, maken lokaal (tijdelijk) een claim aan, laten de webservice een attestatie
+       op de IOTA DLT registreren en een PDF met QR code met verwijzing hiernaar aanmaken in 1 geautomatiseerde stap. De burger kan vervolgens bij een verifier partij de QR code laten scannen
+       waarmee de partij gegevens ontvangt en deze kan valideren.
+      een PDF met QR code.</p>
+    <p>Deze proof of concept applicatie demonstreert bovenstaande workflow in een volledig werkende webapplicatie. De verifier app is gerealiseerd als een client side webapplication
+      die in de browser runt. Inloggen met DigID en koppelingen met registers is out of scope en wordt verondersteld.
+      De webservice is een nodejs applicatie die op de achtergrond moet draaien.</p>
+      <p>Vereisten en installatie:
+        <li>installeer NodeJS</li>
+        <li>installeer http-server : npm install -g http-server</li>
+        <li>installeer discipl core : npm install discipl-core</li>
+      </p>
+      <p>Gebruik:
+          <li>start de waardepapieren webservice door in command prompt vanuit de POC directory de server te starten met het commando: "http-server"</li>
+          <li>open de browser op URL: http://127.0.0.1:8080/index.html Je krijgt dan deze pagina (weer) te zien.</li>
+          <li>gebruik de volgende link om naar de (gemeentelijke) website te gaan: <a href="get.html">Verkrijg uittreksel</a></li>
+          <li>gebruik de volgende link om naar de verifier app te gaan: <a href="verify.html">Gebruik uittreksel</a></li>
+      </p>
+      <p style="font: 8pt Verdana">(p)(c)2017 ICTU/Gemeente Haarlem (GPLv3/CC-BY-SA) </p>
+  </body>
+</html>
