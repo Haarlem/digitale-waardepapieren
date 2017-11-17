@@ -1,0 +1,19 @@
+{
+  "name": "waardepapieren-poc",
+  "version": "1.0.0",
+  "description": "Work in progress.",
+  "main": "claimattest.js",
+  "dependencies": {
+    "discipl-core": "0.2.2",
+    "jimp": "0.2.28",
+    "lzutf8": "0.4.7",
+    "qrcode": "1.0.0",
+    "qrcode-reader": "1.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
