@@ -4,9 +4,13 @@
   "description": "Work in progress.",
   "main": "claimattest.js",
   "dependencies": {
+    "console-log-level": "1.4.0",
+    "debug": "3.1.0",
     "discipl-core": "0.2.2",
+    "image-parser": "1.2.5",
     "jimp": "0.2.28",
     "lzutf8": "0.4.7",
+    "node-cmd": "3.0.0",
     "qrcode": "1.0.0",
     "qrcode-reader": "1.0.4"
   },

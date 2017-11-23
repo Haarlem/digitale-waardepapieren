@@ -1,0 +1,84 @@
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>test.bat
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>REM set DEBUG="claimattest,dciota"
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>del state.tmp
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>del *.png
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>del *.dat
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node claimattest.js
+Waardepapieren POC testscript : claim and attest
+Message attached
+QRCode source: V/TiWkoCc40/AiuFoo72xGAtOcVJDt1uYx4dGlyMuAzCJDhbxbkeR0wAlB0+qWKYQX/kOKdHRfrTdiwfZwyNUA==,{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"},{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS", "attestation" : "QJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT", "attestor" : "did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT"}
+Written compressed source in attestedClaim.dat...
+saved as QR code : test.png
+Scanning the QR code (test.png) should give you the contents in attestedClaim.dat.
+Try it out at webqr.com
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move attestedClaim.dat a1.dat
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move test.png t1.png
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node claimattest.js
+Waardepapieren POC testscript : claim and attest
+Message attached
+QRCode source: xWSTM1qYJQtBcod9oAZnVZuRdeptfsBFb8VZ/pf+sBc5DP+4qXw6ZT5+wmyeGr9KSWw9e2/BGRxn7ai5pubAEw==,{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"},{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS", "attestation" : "NBRYEXBS9WAAYNKXBTSDEIMEBXPFZPJKDBCVUUAMQ9BAGDBFUFVU9NIQPVUSKI9YWRBBDIHFQKVNMBYZ9", "attestor" : "did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT"}
+Written compressed source in attestedClaim.dat...
+saved as QR code : test.png
+Scanning the QR code (test.png) should give you the contents in attestedClaim.dat.
+Try it out at webqr.com
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move attestedClaim.dat a2.dat
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move test.png t2.png
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node claimattest.js
+Waardepapieren POC testscript : claim and attest
+Message attached
+QRCode source: Oqhy/JQktBou/oHlvhm3Olp7OehB6shqaeemwErNBKuR9r1bnVYE3WmjYbOmEf7OrJSCNzIvTctD9mrsrJeS6g==,{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"},{"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS", "attestation" : "RSMVVMKUIVEPLTSYRKPPJAJEMZZRTWOCVRQPQW9EMBIAI9WPGM9LYNJOXLFFYJNZRLZVVVPOOSKURPZSP", "attestor" : "did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT"}
+Written compressed source in attestedClaim.dat...
+saved as QR code : test.png
+Scanning the QR code (test.png) should give you the contents in attestedClaim.dat.
+Try it out at webqr.com
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move attestedClaim.dat a3.dat
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>move test.png t3.png
+        1 file(s) moved.
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node verifier-app.js a2.dat
+Waardepapieren POC testscript : verify
+Reading QRcode source (a2.dat)...
+Read the following information:
+Key: xWSTM1qYJQtBcod9oAZnVZuRdeptfsBFb8VZ/pf+sBc5DP+4qXw6ZT5+wmyeGr9KSWw9e2/BGRxn7ai5pubAEw==
+Claim: {"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"}
+Attestation reference: NBRYEXBS9WAAYNKXBTSDEIMEBXPFZPJKDBCVUUAMQ9BAGDBFUFVU9NIQPVUSKI9YWRBBDIHFQKVNMBYZ9
+Attestator DID: did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT
+Verified!
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node verifier-app.js a1.dat
+Waardepapieren POC testscript : verify
+Reading QRcode source (a1.dat)...
+Read the following information:
+Key: V/TiWkoCc40/AiuFoo72xGAtOcVJDt1uYx4dGlyMuAzCJDhbxbkeR0wAlB0+qWKYQX/kOKdHRfrTdiwfZwyNUA==
+Claim: {"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"}
+Attestation reference: QJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT
+Attestator DID: did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT
+Verified!
+
+C:\Users\bkaptijn\Documents\haarlem\digitale-waardepapieren\poc>node verifier-app.js a3.dat
+Waardepapieren POC testscript : verify
+Reading QRcode source (a3.dat)...
+Read the following information:
+Key: Oqhy/JQktBou/oHlvhm3Olp7OehB6shqaeemwErNBKuR9r1bnVYE3WmjYbOmEf7OrJSCNzIvTctD9mrsrJeS6g==
+Claim: {"@id" : "did:discipl:localDZrW9pshWGR4Fh+6x8WEBi6miS/1VxChrG6gnDDTUZQY24qannLH4/HvW8leIijS","name":"John Doe","Street":"John Doestreet 7","Zipcode":"1234AA","City":"Haarlem","SSN":"123456789"}
+Attestation reference: RSMVVMKUIVEPLTSYRKPPJAJEMZZRTWOCVRQPQW9EMBIAI9WPGM9LYNJOXLFFYJNZRLZVVVPOOSKURPZSP
+Attestator DID: did:discipl:iotaQJELYYLNJATEQOGJWJYJOVTMJXKW9VPUIQKLQCGBGRXCZDQAINJCJYFXXEVGDJKJQAMLVRAZLYUGYMPVT
+Verified!

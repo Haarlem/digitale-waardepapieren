@@ -1,17 +1,28 @@
-Installation: install requirements
+##Installation:
 
+'''
 npm install
+'''
 
-Usage:
+##Usage:
 
-node claimattest.js : writes an attestation (keyed hash of claim) to the IOTA Tangle and generates QR Code (test.png) with the claim, attestation reference and key.
+###claimattest.js
+writes an attestation (keyed hash of claim) to the IOTA Tangle and generates QR Code (test.png) with the claim, attestation reference and key.
+'''
+node claimattest.js
+'''
 
-node verifier-app.js : reads the QR code and verifies the information is also found on the tangle resulting in the message "Verified!"
+###verifier-app.js
+reads the QR code and verifies the information is also found on the tangle resulting in the message "Verified!"
+'''
+node verifier-app.js
+'''
 
+NB A test.png is already included, it's attestation already on the Tangle (in the given testnode), so running the verifier-app.js should work without running claimattest.js first.
 
 Note this is work in progress
 
-Issues:
+##Issues:
 
 the following is an issue within this poc application:
 - QR Code reader does not function every time somehow. just try a different seed (altering the source of the QR code).
