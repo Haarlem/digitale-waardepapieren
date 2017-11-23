@@ -1,4 +1,4 @@
 # Digitale Waardepapieren
 
 pot : proof of technology tests - deprecated
-poc : (basic) proof of concept - work in progress
+poc : (basic) proof of concept using discipl-core
