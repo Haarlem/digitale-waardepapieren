@@ -14,7 +14,7 @@ const pkey = "JSdhshshdi7S8bYHS";
 
 // set seed to a unique seed of 81 characters as private key the attestor's channel will be bound to. The DID will include an address (can be seen as public key)
 // to access the first message in the channel.
-const attestorseed = "VERIHMSDNLKS9SDS99WQTWQEWEMNBNDSLFDHIQBQVDQBFFFLSHJSD99SDBW9SDDKEWHB9ETWYVCXNB9US";
+const attestorseed = "VERIHMSDNLKS9SDS99WQTWQEWEMNBNDSLFDHIQBQVDQBFFFLSHJSD99SDBW9SDDKEWHB9ETWYVCXNB9UT";
 
 const attestorChannel = "";
 
