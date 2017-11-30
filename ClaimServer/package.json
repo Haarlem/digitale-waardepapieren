@@ -1,0 +1,20 @@
+{
+  "name": "claim-server",
+  "version": "1.0.0",
+  "description": "Keyserver for claims and attest. Exposes REST API's",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node tests/test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discipl-core": "^0.2.3",
+    "knex": "^0.14.2",
+    "random-number-csprng": "^1.0.2",
+    "restify": "^6.3.4",
+    "restify-cors-middleware": "^1.0.1",
+    "sqlite3": "^3.1.13"
+  }
+}
