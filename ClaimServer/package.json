@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discipl-core": "^0.2.3",
+    "iota.lib.js": "^0.4.3",
     "knex": "^0.14.2",
     "random-number-csprng": "^1.0.2",
     "restify": "^6.3.4",

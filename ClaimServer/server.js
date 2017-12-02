@@ -15,10 +15,11 @@ server.use(cors.actual)
 server.use(restifyPlugins.bodyParser())
 
 // Require API endpoints here
-require('./api/claim.js')(server)
+var apiClaim = require('./api/claim.js')
 
 module.exports = {
-  start() {
+  start(iota) {
+    apiClaim(server, iota)
     const port = process.env.PORT || 8080
     server.listen(port, function() {
       console.log('%s listening at %s', server.name, server.url)

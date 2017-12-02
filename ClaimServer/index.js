@@ -19,9 +19,8 @@ async function initDefaultChannel(iota, name) {
   var settings = await db.getSettings();
   console.log('Settings: ', settings);
   var iota = new IOTA({ provider: settings.iota_provider })
-  
   await initDefaultChannel(iota, "haarlem")
 
   const server = require('./server.js')
-  server.start()
+  server.start(iota)
 })()

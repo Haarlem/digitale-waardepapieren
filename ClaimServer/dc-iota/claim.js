@@ -1,15 +1,18 @@
 const discipl = require('discipl-core')
 
 module.exports = async (obj) => {
-  var { mamState, data } = obj
+  var { iota, mamState, data, did, rKey } = obj
+  const claim = Object.assign({}, data, { "@id": did })
+  Object.freeze(claim)
 
-  const did = await discipl.iota.getDid(mamState.seed)
-  debug("Attestor DID: " + did);
-  var ref = await discipl.iota.attest(claim, attestorseed, key);
-  mamState = discipl.iota.getState();
-  debug("Attestion Reference: " + ref);
+  console.log(iota.api.sendTransfer);
+  const iotaConnector = new discipl.connectors.iota(iota)
+  const attestorDid = await discipl.getDid(iotaConnector, mamState)
+  console.log("Attestor DID: " + attestorDid);
+  var { mamState, root } = await discipl.attest(iotaConnector, mamState, claim, rKey);
+  console.log("Attestion Root: " + root);
   var result = new Object();
-  result.aref = ref;
-  result.adid = did;
+  result.aref = root;
+  result.adid = attestorDid;
   return result;
 }

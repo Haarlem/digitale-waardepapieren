@@ -3,6 +3,7 @@ var CryptoJS = require('crypto-js');
 var QRCode = require('qrcode');
 var LZUTF8 = require('lzutf8');
 var fs = require('fs');
+const Mam = require('mam.client.js/lib/mam.node.js')
 
 console.log("Waardepapieren POC testscript : claim and attest");
 
@@ -14,7 +15,7 @@ const pkey = "JSdhshshdi7S8bYHS";
 
 // set seed to a unique seed of 81 characters as private key the attestor's channel will be bound to. The DID will include an address (can be seen as public key)
 // to access the first message in the channel.
-const attestorseed = "VERIHMSDNLKS9SDS99WQTWQEWEMNBNDSLFDHIQBQVDQBFFFLSHJSD99SDBW9SDDKEWHB9ETWYVCXNB9UT";
+const attestorseed = "VPNEFNOZOXPGKOPUEAVS9RIIQGPIFEYBEFGUECJAGFICMMYTBDTFCMTXLHWDOYJCDYALFNAYXLIZSXLFV";
 
 const attestorChannel = "";
 

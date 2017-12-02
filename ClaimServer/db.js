@@ -31,14 +31,16 @@ module.exports = {
         })
     });
   },
-  async getMamStateByChannelName(name) {
+  async getMamStateByChannelName(iota, name) {
+    const iotaConnector = new discipl.connectors.iota(iota)
     var channel = await this.getChannelByName(name)
-    return JSON.parse(channel.mamState)
+    return discipl.deserialize(iotaConnector, channel.mamState)
   },
   async newChannel(obj) {
     const seed = await seedGen()
     const iotaConnector = new discipl.connectors.iota(obj.iota)
     var mamState = discipl.initState(iotaConnector, seed)
+    console.log(mamState);
     const did = await discipl.getDid(iotaConnector, mamState)
 
     return new Promise(function(resolve, reject) {
@@ -87,7 +89,7 @@ module.exports = {
       }).then(() => {
         knex.schema.createTableIfNotExists('settings', (table) => {
           table.increments();
-          table.string('iota_provider', 255).defaultTo('https://p103.iotaledger.net:14700/');
+          table.string('iota_provider', 255).defaultTo('http://p103.iotaledger.net:14700/');
         }).then(() => {
           knex('settings').insert({
 
