@@ -11,8 +11,5 @@ module.exports = async (obj) => {
   console.log("Attestor DID: " + attestorDid);
   var { mamState, root } = await discipl.attest(iotaConnector, mamState, claim, rKey);
   console.log("Attestion Root: " + root);
-  var result = new Object();
-  result.aref = root;
-  result.adid = attestorDid;
-  return result;
+  return { root, mamState, attestorDid };
 }

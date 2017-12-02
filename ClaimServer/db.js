@@ -40,7 +40,6 @@ module.exports = {
     const seed = await seedGen()
     const iotaConnector = new discipl.connectors.iota(obj.iota)
     var mamState = discipl.initState(iotaConnector, seed)
-    console.log(mamState);
     const did = await discipl.getDid(iotaConnector, mamState)
 
     return new Promise(function(resolve, reject) {
