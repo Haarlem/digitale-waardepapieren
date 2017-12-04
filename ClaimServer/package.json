@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node tests/test.js"
+    "test": "node tests/test.js",
+    "test_concurrent_claims": "node tests/concurrentClaims.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "iota.lib.js": "^0.4.3",
     "knex": "^0.14.2",
     "random-number-csprng": "^1.0.2",
+    "request": "^2.83.0",
     "restify": "^6.3.4",
     "restify-cors-middleware": "^1.0.1",
     "sqlite3": "^3.1.13"
