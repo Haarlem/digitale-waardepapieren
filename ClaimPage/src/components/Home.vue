@@ -11,10 +11,10 @@
       <!--DMAILER_SECTION_BOUNDARY_END-->
       <!--DMAILER_SECTION_BOUNDARY_-->
       <p class="button-set">
-        <a href="https://www.haarlem.nl/ufs/ufsmain?formid=uittreksel" title="Regel online" class="button-contrast">
+        <router-link to="Login" title="Regel online" class="button-contrast">
           <span aria-hidden="true" data-icon="i"></span>
           Regel online
-      </a>
+      </router-link>
         <span>U heeft voor het invullen uw DigiD nodig.  Een geboorte-, huwelijks- of overlijdensakte vraagt u aan op de pagina Akte burgerlijke stand</span>
       </p>
       <!--DMAILER_SECTION_BOUNDARY_END-->
