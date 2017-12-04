@@ -50,6 +50,9 @@ module.exports = (server, iota) => {
       })
       .catch(function(err) {
         console.error(err);
+        res.contentType = 'json'
+        res.send({ error: err })
+        next();
       });
   })
 }
