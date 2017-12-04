@@ -24,10 +24,7 @@ import Singleton from "@/utils/Singleton.js"
 export default {
   methods: {
     login() {
-      Singleton.user = {
-        username: this.username,
-        password: this.password
-      }
+      Singleton.user.username = this.username
       this.$router.push({ name: 'Claim' })
     }
   },
