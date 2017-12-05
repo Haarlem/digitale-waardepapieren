@@ -8,8 +8,7 @@ var knex = db.knex
 module.exports = (server, iota) => {
   server.post('/claim', async (req, res, next) => {
     var {
-      did,
-      rKey
+      did
     } = req.body
     var claimed
 
@@ -27,7 +26,6 @@ module.exports = (server, iota) => {
             var mamState = discipl.deserialize(iotaConnector, channel.mamState)
 
             claimed = await claim({
-              rKey,
               did,
               iota,
               data,
