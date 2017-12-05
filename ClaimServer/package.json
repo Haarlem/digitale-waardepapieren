@@ -13,6 +13,7 @@
   "dependencies": {
     "iota.lib.js": "^0.4.3",
     "knex": "^0.14.2",
+    "mam.client.js": "l3wi/mam.client.js",
     "random-number-csprng": "^1.0.2",
     "request": "^2.83.0",
     "restify": "^6.3.4",

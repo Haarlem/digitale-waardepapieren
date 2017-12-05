@@ -1,5 +1,6 @@
 const seedGen = require("./helpers/seedGen.js")
 const discipl = require('discipl-core');
+const Mam = require('mam.client.js/lib/mam.node.js')
 
 var knex = require('knex')({
   client: 'sqlite3',
@@ -32,13 +33,13 @@ module.exports = {
     });
   },
   async getMamStateByChannelName(iota, name) {
-    const iotaConnector = new discipl.connectors.iota(iota)
+    const iotaConnector = new discipl.connectors.iota(Mam, iota)
     var channel = await this.getChannelByName(name)
     return discipl.deserialize(iotaConnector, channel.mamState)
   },
   async newChannel(obj) {
     const seed = await seedGen()
-    const iotaConnector = new discipl.connectors.iota(obj.iota)
+    const iotaConnector = new discipl.connectors.iota(Mam, obj.iota)
     var mamState = discipl.initState(iotaConnector, seed)
     const did = await discipl.getDid(iotaConnector, mamState)
 

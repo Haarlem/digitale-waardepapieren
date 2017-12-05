@@ -1,4 +1,5 @@
 const discipl = require('discipl-core')
+const Mam = require('mam.client.js/lib/mam.node.js')
 
 module.exports = async (obj) => {
   var { iota, mamState, data, did, rKey } = obj
@@ -7,7 +8,7 @@ module.exports = async (obj) => {
 
   console.log(iota.api.sendTransfer);
   // TODO check if have to stringify obj
-  const iotaConnector = new discipl.connectors.iota(iota)
+  const iotaConnector = new discipl.connectors.iota(Mam, iota)
   const attestorDid = await discipl.getDid(iotaConnector, mamState)
   console.log("Attestor DID: " + attestorDid);
   var { mamState, root } = await discipl.attest(iotaConnector, mamState, claim, rKey);

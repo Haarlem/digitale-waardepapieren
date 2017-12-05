@@ -99,7 +99,15 @@ aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-babel-runtime@^6.23.0:
+babel-polyfill@^6.26.0:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
+  dependencies:
+    babel-runtime "^6.26.0"
+    core-js "^2.5.0"
+    regenerator-runtime "^0.10.5"
+
+babel-runtime@^6.23.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -231,7 +239,7 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
 
-core-js@^2.4.0:
+core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
@@ -699,7 +707,13 @@ interpret@^1.0.4:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-iota.lib.js@^0.4.3:
+iota.crypto.js@iotaledger/iota.crypto.js:
+  version "0.4.2"
+  resolved "https://codeload.github.com/iotaledger/iota.crypto.js/tar.gz/05c5b4485ad8232fd5b9145e02fe988a035a7704"
+  dependencies:
+    crypto-js "^3.1.9-1"
+
+iota.lib.js@^0.4.2, iota.lib.js@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/iota.lib.js/-/iota.lib.js-0.4.3.tgz#9e8417e98720cc24e99bd9f8f6b77212f78386ca"
   dependencies:
@@ -913,7 +927,7 @@ liftoff@2.3.0:
     rechoir "^0.6.2"
     resolve "^1.1.7"
 
-loader-utils@^1.0.2:
+loader-utils@^1.0.2, loader-utils@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -947,6 +961,16 @@ lru-cache@^4.1.1:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
+
+mam.client.js@l3wi/mam.client.js:
+  version "0.0.1"
+  resolved "https://codeload.github.com/l3wi/mam.client.js/tar.gz/5ef24533eec430562986ec223ae618c2b8ac45d8"
+  dependencies:
+    babel-polyfill "^6.26.0"
+    iota.crypto.js iotaledger/iota.crypto.js
+    iota.lib.js "^0.4.2"
+    pify "^3.0.0"
+    rust-wasm-loader "^0.1.2"
 
 map-cache@^0.2.0:
   version "0.2.2"
@@ -1192,6 +1216,10 @@ pidusage@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pidusage/-/pidusage-1.2.0.tgz#65ee96ace4e08a4cd3f9240996c85b367171ee92"
 
+pify@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
+
 preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
@@ -1256,6 +1284,10 @@ rechoir@^0.6.2:
   resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
   dependencies:
     resolve "^1.1.6"
+
+regenerator-runtime@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
 regenerator-runtime@^0.11.0:
   version "0.11.0"
@@ -1401,6 +1433,13 @@ rimraf@~2.4.0:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.4.5.tgz#ee710ce5d93a8fdb856fb5ea8ff0e2d75934b2da"
   dependencies:
     glob "^6.0.1"
+
+rust-wasm-loader@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/rust-wasm-loader/-/rust-wasm-loader-0.1.2.tgz#995366b30195f5f079dd2f5dcbef136f13940fd7"
+  dependencies:
+    loader-utils "^1.0.3"
+    toml "^2.3.2"
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
@@ -1559,6 +1598,10 @@ tildify@1.2.0:
   resolved "https://registry.yarnpkg.com/tildify/-/tildify-1.2.0.tgz#dcec03f55dca9b7aa3e5b04f21817eb56e63588a"
   dependencies:
     os-homedir "^1.0.0"
+
+toml@^2.3.2:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/toml/-/toml-2.3.3.tgz#8d683d729577cb286231dfc7a8affe58d31728fb"
 
 tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   version "2.3.3"

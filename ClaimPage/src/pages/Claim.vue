@@ -31,7 +31,7 @@ export default {
       const rKey = await discipl.claim(localConnector, claimStr, pkey)
       console.log('rKey', rKey);
       var r = await ClaimClient.claim({
-        did, rKey, forceData: this.login
+        did, rKey, forceData: claimStr
       })
       console.log(r);
     }

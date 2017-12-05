@@ -10,7 +10,7 @@
 		{
 			"name": "Claim",
 			"request": {
-				"url": "http://localhost:8080/claim",
+				"url": "http://localhost:8081/claim",
 				"method": "POST",
 				"header": [
 					{
