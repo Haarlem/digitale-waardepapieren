@@ -6,6 +6,7 @@ module.exports = async (obj) => {
   Object.freeze(claim)
 
   console.log(iota.api.sendTransfer);
+  // TODO check if have to stringify obj
   const iotaConnector = new discipl.connectors.iota(iota)
   const attestorDid = await discipl.getDid(iotaConnector, mamState)
   console.log("Attestor DID: " + attestorDid);

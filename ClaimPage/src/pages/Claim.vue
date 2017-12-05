@@ -5,15 +5,39 @@
       <p>
         Geboren te {{ login.birth_city }} in {{ login.birth_date }}
       </p>
+
+      <input type="button" @click="create()" value="Waardepapier aanmaken" />
     </div>
   </div>
 </template>
 
 <script>
 import Singleton from "@/utils/Singleton.js"
+import RandomString from '@/utils/RandomString.js'
+import discipl from 'discipl-core'
+import ClaimClient from '@/utils/ClaimClient.js'
 
 export default {
+  methods: {
+    async create() {
+      // pkey is a cryptographically secure random string
+      const localConnector = new discipl.connectors.local()
+      discipl.initState(localConnector, null)
+      const pkey = RandomString(32);
+      const did = await discipl.getDid(localConnector, pkey)
+      const claim = Object.assign({}, this.login, { "@id": did })
+      const claimStr = JSON.stringify(claim)
+      console.log(claimStr);
+      const rKey = await discipl.claim(localConnector, claimStr, pkey)
+      console.log('rKey', rKey);
+      var r = await ClaimClient.claim({
+        did, rKey, forceData: this.login
+      })
+      console.log(r);
+    }
+  },
   mounted() {
+    console.log(discipl);
     var birth_day = Math.round(1 + (Math.random() * 31))
     if(birth_day < 10) {
       birth_day = "0" + birth_day
@@ -24,7 +48,7 @@ export default {
     }
     var birth_year = Math.round(1950 + (Math.random() * 50))
     var birth_city = "Haarlem"
-    
+
     this.login.birth_city = birth_city
     this.login.birth_date = `${ birth_day }-${ birth_month }-${ birth_year }`
   },
