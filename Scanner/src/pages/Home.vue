@@ -21,6 +21,7 @@ var c = 0;
 var stype = 0;
 var gUM = false;
 var webkit = false
+var moz = false
 var v = null
 
 function success(stream) {
@@ -73,19 +74,15 @@ function handleFiles(f) {
   }
 }
 
-function read(a) {
-  alert(a);
-}
-
 function isCanvasSupported() {
   var elem = document.createElement('canvas');
   return !!(elem.getContext && elem.getContext('2d'));
 }
 
-function load(gCanvas) {
+function load(gCanvas, callback) {
   if (isCanvasSupported() && window.File && window.FileReader) {
     initCanvas(gCanvas, 800, 600);
-    qrcode.callback = read;
+    qrcode.callback = callback;
     setwebcam();
   } else {
     // document.getElementById("mainbody").innerHTML='<p id="mp1">QR code scanner for HTML5 capable browsers</p><br>'+
@@ -212,7 +209,7 @@ export default {
   mounted() {
     v = this.$refs.v
     gCanvas = this.$refs.qrCanvas
-    load(this.$refs.qrCanvas)
+    load(this.$refs.qrCanvas, this.onDetected.bind(this))
   },
   methods: {
     onDetected(data) {
