@@ -41,14 +41,13 @@ qrcode.vidSuccess = function(stream) {
   else if (qrcode.moz) {
     qrcode.video.mozSrcObject = stream;
     qrcode.video.play();
-  } else
+  } else {
     qrcode.video.src = stream;
-
+  }
+  
   qrcode.gUM = true;
-
   qrcode.canvas_qr2 = document.createElement('canvas');
   qrcode.canvas_qr2.id = "qr-canvas";
-  qrcode.canvas_qr2.style.display = "hidden";
   qrcode.qrcontext2 = qrcode.canvas_qr2.getContext('2d');
   qrcode.canvas_qr2.width = qrcode.video.videoWidth;
   qrcode.canvas_qr2.height = qrcode.video.videoHeight;

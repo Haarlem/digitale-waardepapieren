@@ -218,8 +218,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+//TODO fix style of qrVideo
 .qrVideo
 	width 100%
-.qrCanvas
 	display none
+.qrCanvas
+	width 100%!important
 </style>
