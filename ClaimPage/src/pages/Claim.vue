@@ -20,7 +20,6 @@ import RandomString from '@/utils/RandomString.js'
 import discipl from 'discipl-core'
 import ClaimClient from '@/utils/ClaimClient.js'
 import QrCode from '@/components/qrcode.vue'
-import LZString from 'lz-string'
 
 export default {
   components: {
@@ -43,9 +42,6 @@ export default {
         pKey,
         attestorDid: r.body.attestorDid
       });
-      console.log(qrString);
-      qrString = LZString.compress(qrString)
-      console.log(qrString);
       this.qrData = qrString
     }
   },

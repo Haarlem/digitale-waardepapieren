@@ -1,14 +1,14 @@
 <template lang="pug">
 #box
 	div
-		video(ref="v")
-		canvas(ref="qrCanvas")
+		video.qrVideo(ref="v")
+		canvas.qrCanvas(ref="qrCanvas")
 
 		.form-elem
 			span Kanaal:
 			select(v-model="selectedChannel")
-			option(value="1") Haarlem
-			| <div @click="scan()" class="btn btn-1 main">Scan</div>
+				option(value="1") Haarlem
+			|<div @click="scan()" class="btn btn-1 main">Scan</div>
 </template>
 
 <script>
@@ -198,15 +198,16 @@ export default {
   mounted() {
     v = this.$refs.v
     gCanvas = this.$refs.qrCanvas
-    load(this.$refs.qrCanvas, this.onDetected.bind(this))
   },
   methods: {
     onDetected(data) {
-      alert("DATA! " + data.length)
-      var code = data.codeResult.code
-      var json = JSON.parse(data.codeResult.code)
+      alert("DATA! " + data)
+      // var code = data.codeResult.code
+      // var json = JSON.parse(data.codeResult.code)
     },
-    scan() {}
+    scan() {
+      load(this.$refs.qrCanvas, this.onDetected.bind(this))
+    }
   },
   data() {
     return {
@@ -216,5 +217,9 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="stylus" scoped>
+.qrVideo
+	width 100%
+.qrCanvas
+	display none
 </style>
