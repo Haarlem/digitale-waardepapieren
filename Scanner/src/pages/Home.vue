@@ -23,6 +23,7 @@ var gUM = false;
 var webkit = false
 var moz = false
 var v = null
+var jsQR = require("jsqr")
 
 function success(stream) {
   if (webkit)
@@ -40,24 +41,6 @@ function success(stream) {
 function error(error) {
   gUM = false;
   return;
-}
-
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function drop(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  var dt = e.dataTransfer;
-  var files = dt.files;
-  handleFiles(files);
 }
 
 function handleFiles(f) {
@@ -193,7 +176,13 @@ function captureToCanvas() {
     try {
       gCtx.drawImage(v, 0, 0);
       try {
-        qrcode.decode(gCanvas);
+        var imageData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
+        var decoded = jsQR.decodeQRFromImage(imageData.data, imageData.width, imageData.height);
+        if(decoded) {
+          qrcode.callback(decoded)
+        } else {
+          setTimeout(captureToCanvas, 500);
+        }
       } catch (e) {
         console.log(e);
         setTimeout(captureToCanvas, 500);

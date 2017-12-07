@@ -43,6 +43,7 @@ export default {
         pKey,
         attestorDid: r.body.attestorDid
       });
+      console.log(qrString);
       qrString = LZString.compress(qrString)
       console.log(qrString);
       this.qrData = qrString
