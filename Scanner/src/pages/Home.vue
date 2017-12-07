@@ -2,7 +2,8 @@
 #box
 	div
 		video.qrVideo(ref="v")
-		canvas.qrCanvas(ref="qrCanvas")
+		.workaround
+			canvas.qrCanvas(ref="qrCanvas")
 
 		.form-elem
 			span Kanaal:
@@ -221,7 +222,13 @@ export default {
 //TODO fix style of qrVideo
 .qrVideo
 	width 100%
-	display none
-.qrCanvas
-	width 100%!important
+
+.workaround
+	overflow hidden
+	position absolute
+	left 0
+	top 0
+	width 5px
+	height 5px
+	z-index -1
 </style>
