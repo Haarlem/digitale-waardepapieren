@@ -13,6 +13,9 @@
 </template>
 
 <script>
+import discipl from 'discipl-core'
+require('mam.client.js/lib/mam.web.js')
+
 var gCtx = null;
 var gCanvas = null;
 var imageData = null;
@@ -195,17 +198,38 @@ function captureToCanvas() {
   }
 }
 
+async function onDetected(data) {
+	var iota = window.global.iota
+	console.log(Mam);
+	const iotaConnector = new discipl.connectors.iota(Mam, iota)
+	const localConnector = new discipl.connectors.local()
+	//var data2 = JSON.parse(data.data)
+
+	discipl.initState(iotaConnector, null)
+	discipl.initState(localConnector, null)
+	const pKey = data.pKey
+	const did = await discipl.getDid(localConnector, pKey)
+
+	console.log('did: ' + did);
+
+	var verified = await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
+	console.log('verified', verified);
+}
+
 export default {
   mounted() {
     v = this.$refs.v
     gCanvas = this.$refs.qrCanvas
+
+		// test
+		setTimeout(function() {
+			console.log('testing now!');
+			var data = {"data":"{\"username\":\"Peter Kak\",\"birth_date\":\"24-08-1999\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:localFLuIQ5fKk7uUmYDxsAtUAF9zmUSW2VqVU7st7q6MxjjSkCJedUStcTZO9TP5p+rb\"}","pKey":"xe0xCFPLnl3A6UlHicVxREl54bLF970p","attestorDid":"did:discipl:iotaT9HIRSTUUQUYALBGCNHWHWNWZEGYSBHODFAREITMURIKFTQTVUGVMNKZVDRDBVOZXRMZRXYCGJUHCGSRO"}
+			onDetected(data)
+		}, 5000)
   },
   methods: {
-    onDetected(data) {
-      alert("DATA! " + data)
-      // var code = data.codeResult.code
-      // var json = JSON.parse(data.codeResult.code)
-    },
+    onDetected,
     scan() {
       load(this.$refs.qrCanvas, this.onDetected.bind(this))
     }

@@ -11,7 +11,6 @@ function refresh() {
     { data: this.data, mode: 'byte' }
   ], function (error) {
     if (error) console.error('QR code', error)
-    console.log('qr', error);
   })
 }
 

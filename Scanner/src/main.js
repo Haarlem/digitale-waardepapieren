@@ -1,10 +1,7 @@
-process.on('unhandledRejection', (r) => {
-  console.log(r);
-});
-
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+require('./global.js')
 
 Vue.config.productionTip = false
 

@@ -42,11 +42,11 @@ export default {
         pKey,
         attestorDid: r.body.attestorDid
       });
+      console.log("QR data: ", qrString)
       this.qrData = qrString
     }
   },
   mounted() {
-    console.log(discipl);
     var birth_day = Math.round(1 + (Math.random() * 31))
     if(birth_day < 10) {
       birth_day = "0" + birth_day
