@@ -15,6 +15,7 @@ import Quagga from 'quagga';
 export default {
   methods: {
     onDetected(data) {
+      alert("DATA! " + data.length)
       var code = data.codeResult.code
       var json = JSON.parse(data.codeResult.code)
     },
@@ -27,7 +28,7 @@ export default {
           target: document.querySelector('#qr_result')    // Or '#yourElement' (optional)
         },
         decoder : {
-          readers : ["code_128_reader"]
+          readers : ["qr_reader"]
         }
       }, function(err) {
           if (err) {
