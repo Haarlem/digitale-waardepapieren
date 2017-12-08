@@ -1,15 +1,29 @@
 <template lang="pug">
 #box
 	div
-		video.qrVideo(ref="v")
-		.workaround
-			canvas.qrCanvas(ref="qrCanvas")
+		div(v-show="status == 'scanning'")
+			video.qrVideo(ref="v")
+			.workaround
+				canvas.qrCanvas(ref="qrCanvas")
 
-		.form-elem
-			span Kanaal:
-			select(v-model="selectedChannel")
-				option(value="1") Haarlem
-			|<div @click="scan()" class="btn btn-1 main">Scan</div>
+		form(@submit.prevent="scan()" v-if="status == 'idle'")
+			| BSN:
+			input(required, v-model="bsn", type="number")
+
+			.form-elem
+				span Kanaal:
+				select(v-model="selectedChannel")
+					option(value="1") Haarlem
+				|<div class="btn btn-1 main" @click="$refs.init_form_submit_workaround.click()">Scan</div>
+			input(ref="init_form_submit_workaround", type="submit", style="display:none")
+
+		div(v-if="status == 'correct'")
+			img.stateIcon(src="../assets/img/correct.png")
+			table(class="data")
+				thead
+					tr(v-for="(k, v) in data")
+						th {{ k }}
+						th {{ v }}
 </template>
 
 <script>
@@ -203,7 +217,7 @@ async function onDetected(data) {
 	console.log(Mam);
 	const iotaConnector = new discipl.connectors.iota(Mam, iota)
 	const localConnector = new discipl.connectors.local()
-	//var data2 = JSON.parse(data.data)
+	this.scannedData = JSON.parse(data.data)
 
 	discipl.initState(iotaConnector, null)
 	discipl.initState(localConnector, null)
@@ -214,38 +228,52 @@ async function onDetected(data) {
 
 	var verified = await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
 	console.log('verified', verified);
+
+	if(verified) {
+		this.status = 'correct'
+	}
+	else {
+		this.status = 'incorrect'
+	}
 }
 
 export default {
   mounted() {
     v = this.$refs.v
     gCanvas = this.$refs.qrCanvas
-
-		// test
-		setTimeout(function() {
-			console.log('testing now!');
-			var data = {"data":"{\"username\":\"Peter Kak\",\"birth_date\":\"24-08-1999\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:localFLuIQ5fKk7uUmYDxsAtUAF9zmUSW2VqVU7st7q6MxjjSkCJedUStcTZO9TP5p+rb\"}","pKey":"xe0xCFPLnl3A6UlHicVxREl54bLF970p","attestorDid":"did:discipl:iotaT9HIRSTUUQUYALBGCNHWHWNWZEGYSBHODFAREITMURIKFTQTVUGVMNKZVDRDBVOZXRMZRXYCGJUHCGSRO"}
-			onDetected(data)
-		}, 5000)
   },
   methods: {
     onDetected,
     scan() {
+			this.status = 'scanning'
       load(this.$refs.qrCanvas, this.onDetected.bind(this))
+
+			// test
+			var _detect = this.onDetected.bind(this)
+			setTimeout(function() {
+				console.log('testing now!');
+				var data = {"data":"{\"username\":\"Peter Kak\",\"birth_date\":\"24-08-1999\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:localFLuIQ5fKk7uUmYDxsAtUAF9zmUSW2VqVU7st7q6MxjjSkCJedUStcTZO9TP5p+rb\"}","pKey":"xe0xCFPLnl3A6UlHicVxREl54bLF970p","attestorDid":"did:discipl:iotaT9HIRSTUUQUYALBGCNHWHWNWZEGYSBHODFAREITMURIKFTQTVUGVMNKZVDRDBVOZXRMZRXYCGJUHCGSRO"}
+				_detect(data)
+			}, 5000)
     }
   },
   data() {
     return {
-      selectedChannel: 1
+			status: 'idle',
+      selectedChannel: 1,
+			scannedData: null,
+			bsn: ''
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-//TODO fix style of qrVideo
 .qrVideo
 	width 100%
+
+img.stateIcon
+	width: 50%
 
 .workaround
 	overflow hidden
