@@ -6,6 +6,9 @@
 			.workaround
 				canvas.qrCanvas(ref="qrCanvas")
 
+		div(v-if="status == 'verifying'")
+			beat-loader()
+
 		form(@submit.prevent="scan()" v-if="status == 'idle'")
 			| BSN:
 			input(required, v-model="bsn", type="number")
@@ -17,16 +20,22 @@
 				|<div class="btn btn-1 main" @click="$refs.init_form_submit_workaround.click()">Scan</div>
 			input(ref="init_form_submit_workaround", type="submit", style="display:none")
 
+		div(v-if="status == 'incorrect'")
+			img.stateIcon(src="../assets/img/incorrect.png")
+			|<div class="btn btn-1 main" @click="scan()">Terug</div>
+			|<div class="btn btn-1 main" @click="reset()">Opnieuw scannen</div>
+
 		div(v-if="status == 'correct'")
 			img.stateIcon(src="../assets/img/correct.png")
-			table(class="data")
-				thead
-					tr(v-for="(k, v) in data")
-						th {{ k }}
-						th {{ v }}
+			.dataTable
+				.row(v-for="(v, k) in scannedData")
+					.name {{ displayNames[k] }}
+					.val  {{ v }}
+			|<div class="btn btn-1 main" @click="scan()">Terug</div>
 </template>
 
 <script>
+import BeatLoader from 'vue-spinner/src/BeatLoader.vue'
 import discipl from 'discipl-core'
 require('mam.client.js/lib/mam.web.js')
 
@@ -213,6 +222,7 @@ function captureToCanvas() {
 }
 
 async function onDetected(data) {
+	this.status = 'verifying'
 	var iota = window.global.iota
 	console.log(Mam);
 	const iotaConnector = new discipl.connectors.iota(Mam, iota)
@@ -238,13 +248,22 @@ async function onDetected(data) {
 }
 
 export default {
+	components: {
+		BeatLoader
+	},
   mounted() {
     v = this.$refs.v
     gCanvas = this.$refs.qrCanvas
   },
   methods: {
     onDetected,
+		reset() {
+			this.status = 'idle'
+			this.scannedData = null
+			this.bsn = ''
+		},
     scan() {
+			this.scannedData = null
 			this.status = 'scanning'
       load(this.$refs.qrCanvas, this.onDetected.bind(this))
 
@@ -252,13 +271,19 @@ export default {
 			var _detect = this.onDetected.bind(this)
 			setTimeout(function() {
 				console.log('testing now!');
-				var data = {"data":"{\"username\":\"Peter Kak\",\"birth_date\":\"24-08-1999\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:localFLuIQ5fKk7uUmYDxsAtUAF9zmUSW2VqVU7st7q6MxjjSkCJedUStcTZO9TP5p+rb\"}","pKey":"xe0xCFPLnl3A6UlHicVxREl54bLF970p","attestorDid":"did:discipl:iotaT9HIRSTUUQUYALBGCNHWHWNWZEGYSBHODFAREITMURIKFTQTVUGVMNKZVDRDBVOZXRMZRXYCGJUHCGSRO"}
+				var data = {"data":"{\"username\":\"Peter Pap\",\"birth_date\":\"24-03-1951\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:local+9uPIyg/IhVDXOC8Vam0r6ttw6efqcQfi0ymp29djwhouFFBzwfDyxMVa6mzg2Kj\"}","pKey":"JYA3nM9nJyVgqD8PsXvzfp6c21QucMa7","attestorDid":"did:discipl:iotaUBVFEITYTJ9LCTRLEHGLPPMIDGUOAHAQNVKXOAXTQGMYCZNWBMVHVCGGDKLXDKRITMJOFYFNRBFSKBOJW"}
 				_detect(data)
 			}, 5000)
     }
   },
   data() {
     return {
+			displayNames: {
+				birth_city: "Geboortestad",
+				birth_date: "Geboortedatum",
+				username: "Naam",
+				"@id": "DID"
+			},
 			status: 'idle',
       selectedChannel: 1,
 			scannedData: null,
@@ -274,6 +299,14 @@ export default {
 
 img.stateIcon
 	width: 50%
+
+.dataTable
+	word-wrap: break-word
+	.name
+		font-weight bold
+
+	//.val
+
 
 .workaround
 	overflow hidden
