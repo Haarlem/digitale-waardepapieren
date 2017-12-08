@@ -272,14 +272,6 @@ export default {
 			this.scannedData = null
 			this.status = 'scanning'
       load(this.$refs.qrCanvas, this.onDetected.bind(this))
-
-			// test
-			var _detect = this.onDetected.bind(this)
-			setTimeout(function() {
-				console.log('testing now!');
-				var data = {"data":"{\"username\":\"Peter Pap\",\"birth_date\":\"24-03-1951\",\"birth_city\":\"Haarlem\",\"@id\":\"did:discipl:local+9uPIyg/IhVDXOC8Vam0r6ttw6efqcQfi0ymp29djwhouFFBzwfDyxMVa6mzg2Kj\"}","pKey":"JYA3nM9nJyVgqD8PsXvzfp6c21QucMa7","attestorDid":"did:discipl:iotaUBVFEITYTJ9LCTRLEHGLPPMIDGUOAHAQNVKXOAXTQGMYCZNWBMVHVCGGDKLXDKRITMJOFYFNRBFSKBOJW"}
-				_detect(data)
-			}, 5000)
     }
   },
   data() {
