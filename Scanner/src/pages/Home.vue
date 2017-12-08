@@ -31,7 +31,7 @@
 				.row(v-for="(v, k) in scannedData")
 					.name {{ displayNames[k] }}
 					.val  {{ v }}
-			|<div class="btn btn-1 main" @click="scan()">Terug</div>
+			|<div class="btn btn-1 main" @click="reset()">Opnieuw scannen</div>
 </template>
 
 <script>
@@ -225,6 +225,12 @@ async function onDetected(data) {
 	this.status = 'verifying'
 	var iota = window.global.iota
 	console.log(Mam);
+	var timeoutTimer = setTimeout(() => {
+		var yes = confirm(`De IOTA-node doet er lang over met reageren... Wil je de pagina herladen en het opnieuw proberen?`)
+		if(yes) {
+			window.location.reload()
+		}
+	}, 15000)
 	const iotaConnector = new discipl.connectors.iota(Mam, iota)
 	const localConnector = new discipl.connectors.local()
 	this.scannedData = JSON.parse(data.data)
@@ -237,8 +243,8 @@ async function onDetected(data) {
 	console.log('did: ' + did);
 
 	var verified = await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
+	clearTimeout(timeoutTimer)
 	console.log('verified', verified);
-
 	if(verified) {
 		this.status = 'correct'
 	}
