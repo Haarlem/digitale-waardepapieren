@@ -8,13 +8,14 @@
       <p v-if="qrData != null">
         <qr-code :data="qrData"></qr-code>
       </p>
-
+      <beat-loader v-if="state == 'loading'"></beat-loader>
       <input type="button" @click="create()" value="Waardepapier aanmaken" />
     </div>
   </div>
 </template>
 
 <script>
+import BeatLoader from 'vue-spinner/src/BeatLoader.vue'
 import Singleton from "@/utils/Singleton.js"
 import RandomString from '@/utils/RandomString.js'
 import discipl from 'discipl-core'
@@ -25,10 +26,11 @@ var QRCode = require('qrcode')
 
 export default {
   components: {
-    QrCode
+    QrCode, BeatLoader
   },
   methods: {
     async create() {
+      this.state = 'loading'
       // pKey is a cryptographically secure random string
       const localConnector = new discipl.connectors.local()
       discipl.initState(localConnector, null)
@@ -46,10 +48,12 @@ export default {
       });
       console.log("QR data: ", qrString)
       var canvas = document.createElement('canvas')
+      var _this = this
       QRCode.toCanvas(canvas, [
         { data: claimStr, mode: 'byte' }
       ], function (error) {
         if (error) console.error('QR code', error)
+        _this.state = 'done'
         AttestationPdfMaker.makeAttestationPDF(JSON.parse(qrString), canvas.toDataURL('png'))
       })
     }
@@ -72,7 +76,8 @@ export default {
   data() {
     return {
       login: Singleton.user,
-      qrData: null
+      qrData: null,
+      state: 'idle'
     }
   }
 }
