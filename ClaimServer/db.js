@@ -89,7 +89,7 @@ module.exports = {
       }).then(() => {
         knex.schema.createTableIfNotExists('settings', (table) => {
           table.increments();
-          table.string('iota_provider', 255).defaultTo('http://p103.iotaledger.net:14700/');
+          table.string('iota_provider', 255).defaultTo('https://testnet140.tangle.works/');
         }).then(() => {
           knex('settings').insert({
 

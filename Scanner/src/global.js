@@ -1,7 +1,7 @@
 const IOTA = require('iota.lib.js')
 
 var global = {
-  iota_provider: 'http://p103.iotaledger.net:14700/'
+  iota_provider: 'https://testnet140.tangle.works/'
 }
 
 global.iota = new IOTA({ provider: global.iota_provider })
