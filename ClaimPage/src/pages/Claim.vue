@@ -20,6 +20,8 @@ import RandomString from '@/utils/RandomString.js'
 import discipl from 'discipl-core'
 import ClaimClient from '@/utils/ClaimClient.js'
 import QrCode from '@/components/qrcode.vue'
+import AttestationPdfMaker from '@/utils/AttestationPdfMaker.js'
+var QRCode = require('qrcode')
 
 export default {
   components: {
@@ -43,7 +45,13 @@ export default {
         attestorDid: r.body.attestorDid
       });
       console.log("QR data: ", qrString)
-      this.qrData = qrString
+      var canvas = document.createElement('canvas')
+      QRCode.toCanvas(canvas, [
+        { data: claimStr, mode: 'byte' }
+      ], function (error) {
+        if (error) console.error('QR code', error)
+        AttestationPdfMaker.makeAttestationPDF(JSON.parse(qrString), canvas.toDataURL('png'))
+      })
     }
   },
   mounted() {
