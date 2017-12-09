@@ -50,7 +50,7 @@ export default {
       var canvas = document.createElement('canvas')
       var _this = this
       QRCode.toCanvas(canvas, [
-        { data: claimStr, mode: 'byte' }
+        { data: qrString, mode: 'byte' }
       ], function (error) {
         if (error) console.error('QR code', error)
         _this.state = 'done'

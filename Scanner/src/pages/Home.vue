@@ -222,6 +222,7 @@ function captureToCanvas() {
 }
 
 async function onDetected(data) {
+	data = JSON.parse(data)
 	this.status = 'verifying'
 	var iota = window.global.iota
 	console.log(Mam);
