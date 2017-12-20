@@ -1,0 +1,27 @@
+{
+  "name": "claim-server",
+  "version": "1.0.0",
+  "description": "Keyserver for claims and attest. Exposes REST API's",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node tests/test.js",
+    "test_concurrent_claims": "node tests/concurrentClaims.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discipl-core": "https://github.com/discipl/core.git#functional-api",
+    "iota.lib.js": "^0.4.3",
+    "knex": "^0.14.2",
+    "mam.client.js": "l3wi/mam.client.js",
+    "random-number-csprng": "^1.0.2",
+    "request": "^2.83.0",
+    "restify": "^6.3.4",
+    "restify-cors-middleware": "^1.0.1",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "style-loader": "^0.19.0"
+  }
+}

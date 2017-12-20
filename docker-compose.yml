@@ -1,0 +1,14 @@
+version: '2'
+services:
+  claim_server:
+    restart: always
+    image: node:9.2.0
+    user: "node"
+    working_dir: /home/node/app
+    command: 'bash -c "npm install && npm run start"'
+    volumes:
+      - ./ClaimServer:/home/node/app
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      PORT: '8081'

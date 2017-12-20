@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Digitale Waardepapieren Haarlem",
+		"_postman_id": "335ddf21-d625-0722-4d78-46c0805ec22a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Claim",
+			"request": {
+				"url": "http://localhost:8081/claim",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"did\": \"iota:peter\",\n\t\"rKey\": \"WWTljcK8mhow9oTy\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
