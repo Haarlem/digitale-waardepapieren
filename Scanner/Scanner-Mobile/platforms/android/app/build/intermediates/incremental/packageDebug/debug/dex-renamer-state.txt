@@ -1,0 +1,4 @@
+#Tue Jan 09 20:26:37 CET 2018
+base.0=/home/peter/Projects/digitale-waardepapieren/Scanner/Scanner-Mobile/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+file.0=/home/peter/Projects/digitale-waardepapieren/Scanner/Scanner-Mobile/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
