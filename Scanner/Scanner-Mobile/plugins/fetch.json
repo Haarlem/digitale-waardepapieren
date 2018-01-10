@@ -22,13 +22,5 @@
     },
     "is_top_level": false,
     "variables": {}
-  },
-  "cordova-plugin-browsersync": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-browsersync"
-    },
-    "is_top_level": true,
-    "variables": {}
   }
 }

@@ -19,8 +19,7 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-qrscanner": "2.5.0",
-    "cordova-plugin-browsersync": "0.1.7"
+    "cordova-plugin-qrscanner": "2.5.0"
 }
 // BOTTOM OF METADATA
 });
