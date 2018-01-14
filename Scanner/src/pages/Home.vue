@@ -39,6 +39,7 @@ import BeatLoader from 'vue-spinner/src/BeatLoader.vue'
 import discipl from 'discipl-core'
 require('mam.client.js/lib/mam.web.js')
 var jsQR = require("jsqr")
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 export default {
   components: {
@@ -65,6 +66,18 @@ export default {
 	      .catch(function(err) {
 					console.error('getUserMedia err', err);
 					Raven.captureException(err)
+
+					if(err.name === "PermissionDeniedError") {
+						var msg = [`De camera is nodig voor het scannen van QR codes. Het is ons echter niet gelukt toegang tot de camera te bemachtigen.`];
+						if(isIOS) {
+							msg.push(`Je kan bij Instellingen > Safari de toegang tot de camera aanzetten.`)
+						}
+						else {
+							msg.push(`Mocht u de toegang tot de camera geweigerd hebben, dan kunt u deze via de site-instellingen (meestal vindbaar op de adresbalk) opnieuw activeren.`)
+						}
+						// console.log(msg.join("\n"));
+						alert(msg.join("\n"))
+					}
 	      });
 		},
 		tryScanQR() {
