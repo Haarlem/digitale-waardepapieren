@@ -42,7 +42,7 @@ export default {
         did, forceData: claimStr
       })
       if(typeof r.error !== 'undefined') {
-        alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`)
+        alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`)        
       }
       var qrString = JSON.stringify({
         data: claimStr,

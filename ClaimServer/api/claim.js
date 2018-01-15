@@ -2,6 +2,7 @@ const claim = require('../dc-iota/claim.js')
 const db = require('../db.js')
 const discipl = require('discipl-core')
 const Mam = require('mam.client.js/lib/mam.node.js')
+const ravenHelper = require('../helpers/raven.js')
 
 var knex = db.knex
 
@@ -50,7 +51,7 @@ module.exports = (server, iota) => {
         next();
       })
       .catch(function(err) {
-        console.error(err);
+        ravenHelper.captureException(err)
         res.contentType = 'json'
         res.send({ error: err.message })
         next();
