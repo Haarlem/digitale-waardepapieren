@@ -7,7 +7,8 @@ module.exports = async (obj) => {
   const attestorDid = await discipl.getDid(iotaConnector, mamState)
   console.log("Attestor DID: " + attestorDid);
 
-  var { mamState, root } = await discipl.attest(iotaConnector, mamState, data, did);
+  var { mamState, message, attachResult } = await discipl.attest(iotaConnector, mamState, data, did);
+  var root = message.root;
   console.log("Attestion Root: " + root);
-  return { root, mamState, attestorDid };
+  return { root, mamState, attestorDid, attachResult };
 }

@@ -31,6 +31,10 @@ module.exports = (server, iota) => {
               data,
               mamState
             })
+            if(claimed.attachResult instanceof Error) {
+              throw claimed.attachResult;
+            }
+
             return knex('channels')
               .transacting(trx)
               .where('name', '=', channelName)
@@ -48,7 +52,7 @@ module.exports = (server, iota) => {
       .catch(function(err) {
         console.error(err);
         res.contentType = 'json'
-        res.send({ error: err })
+        res.send({ error: err.message })
         next();
       });
   })
