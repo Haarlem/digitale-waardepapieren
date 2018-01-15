@@ -21,6 +21,7 @@
     "qrcode": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+    "mam.client.js": "https://github.com/peterwilli/mam.client.js.git",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3"

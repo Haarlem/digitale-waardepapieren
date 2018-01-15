@@ -4,7 +4,7 @@ var dsn = null
 module.exports = {
   init(_dsn) {
     dsn = _dsn
-    Raven.config(settings.sentry_dsn).install();
+    Raven.config(dsn).install();
   },
   captureException(e) {
     if(dsn) {
