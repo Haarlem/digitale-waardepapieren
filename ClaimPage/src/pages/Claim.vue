@@ -8,8 +8,32 @@
       <p v-if="qrData != null">
         <qr-code :data="qrData"></qr-code>
       </p>
-      <beat-loader v-if="state == 'loading'"></beat-loader>
-      <input type="button" @click="create()" value="Waardepapier aanmaken" />
+      <p align="center" v-if="state == 'loading'">
+        <span v-if="powProgress > 0">
+          <loading-progress
+            :progress="powProgress"
+            :indeterminate="false"
+            :counter-clockwise="false"
+            :hide-background="false"
+            shape="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80"
+            size="128"
+          />
+          <br />
+          We verwerken nu de attestatieclaim, dit kan tot 60 seconden duren...
+        </span>
+        <span v-else>
+          <loading-progress
+            :progress="0"
+            :indeterminate="false"
+            :counter-clockwise="false"
+            :hide-background="false"
+            shape="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80"
+            size="128"
+          />
+        </span>
+      </p>
+      <input v-if="state == 'loading'" disabled type="button" value="Waardepapier aanmaken" />
+      <input v-else type="button" @click="create()" value="Waardepapier aanmaken" />
     </div>
   </div>
 </template>
@@ -24,7 +48,6 @@ import QrCode from '@/components/qrcode.vue'
 import AttestationPdfMaker from '@/utils/AttestationPdfMaker.js'
 import seedGen from '@/utils/seedGen.js'
 import pify from 'pify'
-require('mam.client.js/lib/mam.web.js')
 
 require('curl.lib.js')
 var QRCode = require('qrcode')
@@ -40,6 +63,7 @@ export default {
   },
   methods: {
     async create() {
+      this.powProgress = 0;
       this.state = 'loading'
       // pKey is a cryptographically secure random string
       const localConnector = new discipl.connectors.local()
@@ -65,6 +89,10 @@ export default {
       ]
       var tmpSeed = await seedGen()
       var preparedTransfers = await pify(iota.api.prepareTransfers.bind(iota.api))(tmpSeed, transfers)
+      this.powProgress = 0.05;
+      curl.setOnProgress((i) => {
+        this.powProgress = Math.min((i / parseFloat(preparedTransfers.length)), 1)
+      })
       var objs = await pify(iota.api.sendTrytes.bind(iota.api))(preparedTransfers, 3, 14)
       console.log('pow done', objs);
       var qrString = JSON.stringify({
@@ -103,11 +131,12 @@ export default {
     return {
       login: Singleton.user,
       qrData: null,
-      state: 'idle'
+      state: 'idle',
+      powProgress: 0
     }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 </style>
