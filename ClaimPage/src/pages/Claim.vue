@@ -22,7 +22,17 @@ import discipl from 'discipl-core'
 import ClaimClient from '@/utils/ClaimClient.js'
 import QrCode from '@/components/qrcode.vue'
 import AttestationPdfMaker from '@/utils/AttestationPdfMaker.js'
+import seedGen from '@/utils/seedGen.js'
+import pify from 'pify'
+require('mam.client.js/lib/mam.web.js')
+
+require('curl.lib.js')
 var QRCode = require('qrcode')
+var IOTA = require('iota.lib.js')
+var iota = new IOTA({
+  provider: 'https://nodes.iota.cafe'
+})
+curl.overrideAttachToTangle(iota)
 
 export default {
   components: {
@@ -41,9 +51,22 @@ export default {
       var r = await ClaimClient.claim({
         did, forceData: claimStr
       })
-      if(typeof r.error !== 'undefined') {
-        alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`)        
+      if(typeof r.body.error !== 'undefined') {
+        alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`);
+        return;
       }
+      curl.init()
+      var transfers = [
+        {
+          address: r.body.message.address,
+          value: 0,
+          message: r.body.message.payload
+        }
+      ]
+      var tmpSeed = await seedGen()
+      var preparedTransfers = await pify(iota.api.prepareTransfers.bind(iota.api))(tmpSeed, transfers)
+      var objs = await pify(iota.api.sendTrytes.bind(iota.api))(preparedTransfers, 3, 14)
+      console.log('pow done', objs);
       var qrString = JSON.stringify({
         data: claimStr,
         pKey,

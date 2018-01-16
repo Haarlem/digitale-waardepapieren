@@ -32,10 +32,6 @@ module.exports = (server, iota) => {
               data,
               mamState
             })
-            if(claimed.attachResult instanceof Error) {
-              throw claimed.attachResult;
-            }
-
             return knex('channels')
               .transacting(trx)
               .where('name', '=', channelName)
@@ -47,10 +43,11 @@ module.exports = (server, iota) => {
       })
       .then(function(resp) {
         res.contentType = 'json'
-        res.send({ root: claimed.root, attestorDid: claimed.attestorDid })
+        res.send({ message: claimed.message, attestorDid: claimed.attestorDid })
         next();
       })
       .catch(function(err) {
+        console.error('claim error', err);
         ravenHelper.captureException(err)
         res.contentType = 'json'
         res.send({ error: err.message })

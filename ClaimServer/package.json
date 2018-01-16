@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discipl-core": "https://github.com/discipl/core.git#functional-api",
     "iota.lib.js": "^0.4.3",
     "knex": "^0.14.2",
     "mam.client.js": "https://github.com/peterwilli/mam.client.js.git#temp-compile",
+    "pify": "^3.0.0",
     "random-number-csprng": "^1.0.2",
     "raven": "^2.3.0",
     "request": "^2.83.0",
