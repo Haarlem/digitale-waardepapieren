@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import BeatLoader from 'vue-spinner/src/BeatLoader.vue'
 import Singleton from "@/utils/Singleton.js"
 import RandomString from '@/utils/RandomString.js'
 import discipl from 'discipl-core'
@@ -59,7 +58,7 @@ curl.overrideAttachToTangle(iota)
 
 export default {
   components: {
-    QrCode, BeatLoader
+    QrCode
   },
   methods: {
     async create() {
