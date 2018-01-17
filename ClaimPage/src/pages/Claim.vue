@@ -32,8 +32,15 @@
           />
         </span>
       </p>
-      <input v-if="state == 'loading'" disabled type="button" value="Waardepapier aanmaken" />
-      <input v-else type="button" @click="create()" value="Waardepapier aanmaken" />
+      <div align="center" v-if="state == 'error'">
+        <h2>Excuses voor het ongemak</h2>
+        Er is iets mis gegaan bij het maken van de attestatieclaim. Probeer het later nog eens.
+        <div style="clear:both;"></div>
+      </div>
+      <div>
+        <input v-if="state == 'loading'" disabled type="button" value="Waardepapier aanmaken" />
+        <input v-else type="button" @click="create()" value="Waardepapier aanmaken" />
+      </div>
     </div>
   </div>
 </template>
@@ -47,14 +54,12 @@ import QrCode from '@/components/qrcode.vue'
 import AttestationPdfMaker from '@/utils/AttestationPdfMaker.js'
 import seedGen from '@/utils/seedGen.js'
 import pify from 'pify'
-
+import { IOTABalanceClient } from '@/utils/iota-balance-client'
 require('curl.lib.js')
 var QRCode = require('qrcode')
 var IOTA = require('iota.lib.js')
-var iota = new IOTA({
-  provider: 'https://nodes.iota.cafe'
-})
-curl.overrideAttachToTangle(iota)
+var iotaBalanceClient = new IOTABalanceClient(IOTA, ['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+curl.overrideAttachToTangle(iotaBalanceClient.iota)
 
 export default {
   components: {
@@ -62,53 +67,62 @@ export default {
   },
   methods: {
     async create() {
-      this.powProgress = 0;
-      this.state = 'loading'
-      // pKey is a cryptographically secure random string
-      const localConnector = new discipl.connectors.local()
-      discipl.initState(localConnector, null)
-      const pKey = RandomString(32);
-      const did = await discipl.getDid(localConnector, pKey)
-      const claim = Object.assign({}, this.login, { "@id": did })
-      const claimStr = JSON.stringify(claim)
-      var r = await ClaimClient.claim({
-        did, forceData: claimStr
-      })
-      if(typeof r.body.error !== 'undefined') {
-        alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`);
-        return;
-      }
-      curl.init()
-      var transfers = [
-        {
-          address: r.body.message.address,
-          value: 0,
-          message: r.body.message.payload
+      try {
+        this.powProgress = 0;
+        this.state = 'loading'
+        // pKey is a cryptographically secure random string
+        const localConnector = new discipl.connectors.local()
+        discipl.initState(localConnector, null)
+        const pKey = RandomString(32);
+        const did = await discipl.getDid(localConnector, pKey)
+        const claim = Object.assign({}, this.login, { "@id": did })
+        const claimStr = JSON.stringify(claim)
+        var r = await ClaimClient.claim({
+          did, forceData: claimStr
+        })
+        if(typeof r.body.error !== 'undefined') {
+          alert(`Er is iets fout gegaan tijdens het maken van de attestatieclaim! Probeer het later nog eens.`);
+          return;
         }
-      ]
-      var tmpSeed = await seedGen()
-      var preparedTransfers = await pify(iota.api.prepareTransfers.bind(iota.api))(tmpSeed, transfers)
-      this.powProgress = 0.05;
-      curl.setOnProgress((i) => {
-        this.powProgress = Math.min((i / parseFloat(preparedTransfers.length)), 1)
-      })
-      var objs = await pify(iota.api.sendTrytes.bind(iota.api))(preparedTransfers, 3, 14)
-      console.log('pow done', objs);
-      var qrString = JSON.stringify({
-        data: claimStr,
-        pKey,
-        attestorDid: r.body.attestorDid
-      });
-      console.log("QR data: ", qrString)
-      var canvas = document.createElement('canvas')
-      var _this = this
-      QRCode.toCanvas(canvas, [
-        { data: qrString, mode: 'byte' }
-      ], function (error) {
-        if (error) console.error('QR code', error)
-        _this.state = 'done'
-        AttestationPdfMaker.makeAttestationPDF(JSON.parse(qrString), canvas.toDataURL('png'))
-      })
+        curl.init()
+        var transfers = [
+          {
+            address: r.body.message.address,
+            value: 0,
+            message: r.body.message.payload
+          }
+        ]
+        var tmpSeed = await seedGen()
+        var preparedTransfers = await iotaBalanceClient.context(async (iota) => {
+          return await pify(iota.api.prepareTransfers.bind(iota.api))(tmpSeed, transfers)
+        })
+        this.powProgress = 0.05;
+        curl.setOnProgress((i) => {
+          this.powProgress = Math.min((i / parseFloat(preparedTransfers.length)), 1)
+        })
+        var objs =  await iotaBalanceClient.context(async (iota) => {
+          return await pify(iota.api.sendTrytes.bind(iota.api))(preparedTransfers, 3, 14)
+        })
+        console.log('pow done', objs);
+        var qrString = JSON.stringify({
+          data: claimStr,
+          pKey,
+          attestorDid: r.body.attestorDid
+        });
+        console.log("QR data: ", qrString)
+        var canvas = document.createElement('canvas')
+        var _this = this
+        QRCode.toCanvas(canvas, [
+          { data: qrString, mode: 'byte' }
+        ], function (error) {
+          if (error) console.error('QR code', error)
+          _this.state = 'done'
+          AttestationPdfMaker.makeAttestationPDF(JSON.parse(qrString), canvas.toDataURL('png'))
+        })
+      } catch (e) {
+        this.state = 'error'
+        Raven.captureException(e)
+      }
     }
   },
   mounted() {
