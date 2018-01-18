@@ -7,11 +7,19 @@ export class IOTABalanceClient {
     })
     this.nodes = nodes
     this.currentNodeIndex = 0
+    console.log(nodes[0]);
   }
 
   switchNodeToIndex(n) {
     this.currentNodeIndex = n
     this.iota.changeNode({ provider: this.nodes[this.currentNodeIndex] })
+    if(typeof this.onChangeNode !== 'undefined') {
+      this.onChangeNode(this.iota)
+    }
+  }
+
+  setOnChangeNode(fn) {
+    this.onChangeNode = fn;
   }
 
   async context(fn) {
