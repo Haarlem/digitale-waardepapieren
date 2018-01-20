@@ -33,6 +33,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new webpack.DefinePlugin({
+      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+    }),
     // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
     new webpack.optimize.UglifyJsPlugin({
       compress: {

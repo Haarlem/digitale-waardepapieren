@@ -99,26 +99,31 @@ export default {
     async onDetected(data) {
 			data = JSON.parse(data)
 		  this.status = 'verifying'
-		  var iota = window.global.iota
-		  console.log(Mam);
 		  var timeoutTimer = setTimeout(() => {
 		    var yes = confirm(`De IOTA-node doet er lang over met reageren... Wil je de pagina herladen en het opnieuw proberen?`)
 		    if (yes) {
 		      window.location.reload()
 		    }
 		  }, 15000)
-		  const iotaConnector = new discipl.connectors.iota(Mam, iota)
-		  const localConnector = new discipl.connectors.local()
-		  this.scannedData = JSON.parse(data.data)
+			var iotaBalanceClient = global.iotaBalanceClient
 
-		  discipl.initState(iotaConnector, null)
-		  discipl.initState(localConnector, null)
+			var iotaConnector = new discipl.connectors.iota(Mam, iotaBalanceClient.iota)
+			var localConnector = new discipl.connectors.local()
+			iotaBalanceClient.setOnChangeNode((iota) => {
+				iotaConnector = new discipl.connectors.iota(Mam, iota)
+			  localConnector = new discipl.connectors.local()
+				discipl.initState(iotaConnector, null)
+			  discipl.initState(localConnector, null)
+			})
+
+		  this.scannedData = JSON.parse(data.data)
 		  const pKey = data.pKey
 		  const did = await discipl.getDid(localConnector, pKey)
-
 		  console.log('did: ' + did);
 
-		  var verified = await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
+		  var verified = await iotaBalanceClient.context(async (iota) => {
+				return await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
+			})
 		  clearTimeout(timeoutTimer)
 		  console.log('verified', verified);
 		  if (verified) {

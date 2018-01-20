@@ -58,7 +58,7 @@ import { IOTABalanceClient } from '@/utils/iota-balance-client'
 require('curl.lib.js')
 var QRCode = require('qrcode')
 var IOTA = require('iota.lib.js')
-var iotaBalanceClient = new IOTABalanceClient(IOTA, ['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+var iotaBalanceClient = new IOTABalanceClient(IOTA, IOTA_NODES)
 iotaBalanceClient.setOnChangeNode((iota) => {
   curl.overrideAttachToTangle(iota)
 })

@@ -1,10 +1,10 @@
-const IOTA = require('iota.lib.js')
+const IOTA = require('iota.lib.js'
+import { IOTABalanceClient } from '@/utils/iota-balance-client'
 
+var iotaBalanceClient = new IOTABalanceClient(IOTA, IOTA_NODES)
 var global = {
-  iota_provider: 'https://xurux_iota.codebuffet.co'
+  iotaBalanceClient
 }
-
-global.iota = new IOTA({ provider: global.iota_provider })
 
 window.global = global
 Object.freeze(window.global)
