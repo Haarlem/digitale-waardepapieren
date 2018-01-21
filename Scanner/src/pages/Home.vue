@@ -108,7 +108,7 @@ export default {
       try {
         data = JSON.parse(data)
         this.status = 'verifying'
-        var iotaBalanceClient = global.iotaBalanceClient
+        var iotaBalanceClient = window.global.iotaBalanceClient
         var iotaConnector = new discipl.connectors.iota(Mam, iotaBalanceClient.iota)
         var localConnector = new discipl.connectors.local()
         iotaBalanceClient.setOnChangeNode((iota) => {
@@ -133,6 +133,7 @@ export default {
         }
       } catch (e) {
 				Raven.captureException(e)
+				console.error('scan error', e);
         this.status = 'error'
       }
     },
