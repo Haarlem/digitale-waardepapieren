@@ -50,16 +50,16 @@ import discipl from 'discipl-core'
 require('mam.client.js/lib/mam.web.js')
 var jsQR = require("jsqr")
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-Raven.config('https://ef249505722843d89573c9b813074483@sentry.io/271418').install({
+Raven.config('https://ef249505722843d89573c9b813074483@sentry.io/271418', {
 	release: COMMITHASH
-});
+}).install();
 
 export default {
   components: {
     BeatLoader
   },
   mounted() {
-
+		Raven.captureException(new Error('test'))
   },
   methods: {
     load() {
