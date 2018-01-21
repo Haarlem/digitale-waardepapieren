@@ -58,9 +58,6 @@ export default {
   components: {
     BeatLoader
   },
-  mounted() {
-		Raven.captureException(new Error('test'))
-  },
   methods: {
     load() {
       var constraints = {
