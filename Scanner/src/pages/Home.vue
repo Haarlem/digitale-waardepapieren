@@ -50,6 +50,9 @@ import discipl from 'discipl-core'
 require('mam.client.js/lib/mam.web.js')
 var jsQR = require("jsqr")
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+Raven.config('https://ef249505722843d89573c9b813074483@sentry.io/271418').install({
+	release: COMMITHASH
+});
 
 export default {
   components: {
@@ -63,7 +66,9 @@ export default {
       var constraints = {
         audio: false,
         video: {
-          facingMode: 'environment'
+          facingMode: 'environment',
+					width: 1280,
+					height: 720
         }
       };
       var video = this.$refs.v

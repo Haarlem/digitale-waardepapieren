@@ -7,6 +7,8 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const GitRevisionPlugin = require('git-revision-webpack-plugin')
+var gitRevisionPlugin = new GitRevisionPlugin()
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -41,6 +43,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       'process.env': require('../config/dev.env')
     }),
     new webpack.DefinePlugin({
+      "COMMITHASH": JSON.stringify(gitRevisionPlugin.commithash()),
       "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
     }),
     new webpack.HotModuleReplacementPlugin(),
