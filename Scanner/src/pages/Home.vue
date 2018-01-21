@@ -92,10 +92,12 @@ export default {
     tryScanQR() {
       var canvas = this.$refs.qrCanvas
       var video = this.$refs.v
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
+			var scaledWidth = Math.min(video.videoWidth, 1024);
+			var scaledHeight = scaledWidth * (video.videoHeight / video.videoWidth)
+      canvas.width = scaledWidth
+      canvas.height = scaledHeight
       var ctx = canvas.getContext('2d')
-      ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight)
+      ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, scaledWidth, scaledHeight)
       var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       var decoded = jsQR.decodeQRFromImage(imageData.data, imageData.width, imageData.height)
       if (decoded) {
@@ -179,13 +181,6 @@ img.stateIcon
 
 	//.val
 
-
 .workaround
-	overflow hidden
-	position absolute
-	left 0
-	top 0
-	width 5px
-	height 5px
-	z-index -1
+	display none
 </style>
