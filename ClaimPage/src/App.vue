@@ -1,6 +1,5 @@
 <template>
 <div id="app">
-
   <body>
     <div>
       <header class="header">
@@ -242,5 +241,6 @@ export default {
   name: 'app'
 }
 </script>
-<style lang="stylus">
+<style lang="css">
+.vue-progress-path{display:inline-block}.vue-progress-path path{fill:none;stroke-width:6;transition:stroke-dashoffset .3s ease-in-out}.vue-progress-path .background{stroke:#ddd}.vue-progress-path .progress{stroke:#40b883}.vue-progress-path.indeterminate path{transition:none}
 </style>

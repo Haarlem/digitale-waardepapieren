@@ -48,6 +48,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
+    new webpack.DefinePlugin({
+      "CLAIM_SERVER_URL": JSON.stringify("http://localhost:8082"),
+      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+    })
   ]
 })
 

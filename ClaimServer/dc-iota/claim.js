@@ -7,7 +7,10 @@ module.exports = async (obj) => {
   const attestorDid = await discipl.getDid(iotaConnector, mamState)
   console.log("Attestor DID: " + attestorDid);
 
-  var { mamState, root } = await discipl.attest(iotaConnector, mamState, data, did);
+  var { mamState, message, attachResult } = await discipl.attest(iotaConnector, mamState, data, did);
+  var root = message.root;
+  // DELETE state from message (otherwise we leak the seed from the municipality, since we send message to the user for PoW) 
+  delete message.state
   console.log("Attestion Root: " + root);
-  return { root, mamState, attestorDid };
+  return { message, mamState, attestorDid, attachResult };
 }

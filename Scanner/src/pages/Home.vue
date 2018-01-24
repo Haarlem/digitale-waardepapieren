@@ -2,11 +2,21 @@
 #box
 	div
 		div(v-show="status == 'scanning'")
-			video.qrVideo(ref="v")
+			video.qrVideo(ref="v", autoplay, playsinline)
 			.workaround
 				canvas.qrCanvas(ref="qrCanvas")
 
 		div(v-if="status == 'verifying'")
+			beat-loader()
+
+		div(v-if="status == 'error'")
+			h3 Helaas..
+			span Er is een fout opgetreden en de ontwikkelaar is geinformeerd. Probeer het later nog eens.
+			|<div class="btn btn-1 main" @click="reset()">Opnieuw scannen</div>
+
+		div(v-if="status == 'retrying'")
+			h3 We blijven proberen...
+			span De IOTA-server waarmee je verbonden bent reageerde niet. We proberen het nu op een andere server.
 			beat-loader()
 
 		form(@submit.prevent="scan()" v-if="status == 'idle'")
@@ -38,255 +48,122 @@
 import BeatLoader from 'vue-spinner/src/BeatLoader.vue'
 import discipl from 'discipl-core'
 require('mam.client.js/lib/mam.web.js')
-
-var gCtx = null;
-var gCanvas = null;
-var imageData = null;
-var ii = 0;
-var jj = 0;
-var c = 0;
-var stype = 0;
-var gUM = false;
-var webkit = false
-var moz = false
-var v = null
 var jsQR = require("jsqr")
-
-function success(stream) {
-  if (webkit)
-    v.src = window.URL.createObjectURL(stream);
-  else
-  if (moz) {
-    v.mozSrcObject = stream;
-    v.play();
-  } else
-    v.src = stream;
-  gUM = true;
-  setTimeout(captureToCanvas, 500);
-}
-
-function error(error) {
-  gUM = false;
-  return;
-}
-
-function handleFiles(f) {
-  var o = [];
-  for (var i = 0; i < f.length; i++) {
-    var reader = new FileReader();
-    reader.onload = (function(theFile) {
-      return function(e) {
-        qrcode.decode(e.target.result);
-      };
-    })(f[i]);
-    // Read in the image file as a data URL.
-    reader.readAsDataURL(f[i]);
-  }
-}
-
-function isCanvasSupported() {
-  var elem = document.createElement('canvas');
-  return !!(elem.getContext && elem.getContext('2d'));
-}
-
-function load(gCanvas, callback) {
-  if (isCanvasSupported() && window.File && window.FileReader) {
-    initCanvas(gCanvas, 800, 600);
-    qrcode.callback = callback;
-    setwebcam();
-  } else {
-    // document.getElementById("mainbody").innerHTML='<p id="mp1">QR code scanner for HTML5 capable browsers</p><br>'+
-    //     '<br><p id="mp2">sorry your browser is not supported</p><br><br>'+
-    //     '<p id="mp1">try <a href="http://www.mozilla.com/firefox"><img src="firefox.png"/></a> or <a href="http://chrome.google.com"><img src="chrome_logo.gif"/></a> or <a href="http://www.opera.com"><img src="Opera-logo.png"/></a></p>';
-  }
-}
-
-function initCanvas(gCanvas, ww, hh) {
-  var w = ww;
-  var h = hh;
-  gCanvas.style.width = w + "px";
-  gCanvas.style.height = h + "px";
-  gCanvas.width = w;
-  gCanvas.height = h;
-  gCtx = gCanvas.getContext("2d");
-  gCtx.clearRect(0, 0, w, h);
-  imageData = gCtx.getImageData(0, 0, 320, 240);
-}
-
-function passLine(stringPixels) {
-  //a = (intVal >> 24) & 0xff;
-  var coll = stringPixels.split("-");
-
-  for (var i = 0; i < 320; i++) {
-    var intVal = parseInt(coll[i]);
-    r = (intVal >> 16) & 0xff;
-    g = (intVal >> 8) & 0xff;
-    b = (intVal) & 0xff;
-    imageData.data[c + 0] = r;
-    imageData.data[c + 1] = g;
-    imageData.data[c + 2] = b;
-    imageData.data[c + 3] = 255;
-    c += 4;
-  }
-  if (c >= 320 * 240 * 4) {
-    c = 0;
-    gCtx.putImageData(imageData, 0, 0);
-  }
-}
-
-function setwebcam2(options) {
-  if (stype == 1) {
-    setTimeout(captureToCanvas, 500);
-    return;
-  }
-  var n = navigator;
-
-  if (n.getUserMedia) {
-    webkit = true;
-    n.getUserMedia({
-      video: options,
-      audio: false
-    }, success, error);
-  } else
-  if (n.webkitGetUserMedia) {
-    webkit = true;
-    n.webkitGetUserMedia({
-      video: options,
-      audio: false
-    }, success, error);
-  } else
-  if (n.mozGetUserMedia) {
-    moz = true;
-    n.mozGetUserMedia({
-      video: options,
-      audio: false
-    }, success, error);
-  }
-
-  stype = 1;
-  setTimeout(captureToCanvas, 500);
-}
-
-function setwebcam() {
-  var options = true;
-  if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
-    try {
-      navigator.mediaDevices.enumerateDevices()
-        .then(function(devices) {
-          devices.forEach(function(device) {
-            if (device.kind === 'videoinput') {
-              if (device.label.toLowerCase().search("back") > -1)
-                options = {
-                  'deviceId': {
-                    'exact': device.deviceId
-                  },
-                  'facingMode': 'environment'
-                };
-            }
-            console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
-          });
-          setwebcam2(options);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    console.log("no navigator.mediaDevices.enumerateDevices");
-    setwebcam2(options);
-  }
-}
-
-function captureToCanvas() {
-  if (stype != 1)
-    return;
-  if (gUM) {
-    try {
-      gCtx.drawImage(v, 0, 0);
-      try {
-        var imageData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
-        var decoded = jsQR.decodeQRFromImage(imageData.data, imageData.width, imageData.height);
-        if(decoded) {
-          qrcode.callback(decoded)
-        } else {
-          setTimeout(captureToCanvas, 500);
-        }
-      } catch (e) {
-        console.log(e);
-        setTimeout(captureToCanvas, 500);
-      };
-    } catch (e) {
-      console.log(e);
-      setTimeout(captureToCanvas, 500);
-    };
-  }
-}
-
-async function onDetected(data) {
-	data = JSON.parse(data)
-	this.status = 'verifying'
-	var iota = window.global.iota
-	console.log(Mam);
-	var timeoutTimer = setTimeout(() => {
-		var yes = confirm(`De IOTA-node doet er lang over met reageren... Wil je de pagina herladen en het opnieuw proberen?`)
-		if(yes) {
-			window.location.reload()
-		}
-	}, 15000)
-	const iotaConnector = new discipl.connectors.iota(Mam, iota)
-	const localConnector = new discipl.connectors.local()
-	this.scannedData = JSON.parse(data.data)
-
-	discipl.initState(iotaConnector, null)
-	discipl.initState(localConnector, null)
-	const pKey = data.pKey
-	const did = await discipl.getDid(localConnector, pKey)
-
-	console.log('did: ' + did);
-
-	var verified = await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
-	clearTimeout(timeoutTimer)
-	console.log('verified', verified);
-	if(verified) {
-		this.status = 'correct'
-	}
-	else {
-		this.status = 'incorrect'
-	}
-}
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+Raven.config('https://ef249505722843d89573c9b813074483@sentry.io/271418', {
+	release: COMMITHASH
+}).install();
 
 export default {
-	components: {
-		BeatLoader
-	},
-  mounted() {
-    v = this.$refs.v
-    gCanvas = this.$refs.qrCanvas
+  components: {
+    BeatLoader
   },
   methods: {
-    onDetected,
-		reset() {
-			this.status = 'idle'
-			this.scannedData = null
-			this.bsn = ''
-		},
+    load() {
+      var constraints = {
+        audio: false,
+        video: {
+          facingMode: 'environment',
+					width: 1280,
+					height: 720
+        }
+      };
+      var video = this.$refs.v
+      var _this = this
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(stream) {
+          video.srcObject = stream
+          setTimeout(_this.tryScanQR.bind(_this), 500)
+        })
+        .catch(function(err) {
+          console.error('getUserMedia err', err);
+          Raven.captureException(err)
+
+          if (err.name === "PermissionDeniedError") {
+            var msg = [`De camera is nodig voor het scannen van QR codes. Het is ons echter niet gelukt toegang tot de camera te bemachtigen.`];
+            if (isIOS) {
+              msg.push(`Je kan bij Instellingen > Safari de toegang tot de camera aanzetten.`)
+            } else {
+              msg.push(`Mocht u de toegang tot de camera geweigerd hebben, dan kunt u deze via de site-instellingen (meestal vindbaar op de adresbalk) opnieuw activeren.`)
+            }
+            // console.log(msg.join("\n"));
+            alert(msg.join("\n"))
+          }
+        });
+    },
+    tryScanQR() {
+      var canvas = this.$refs.qrCanvas
+      var video = this.$refs.v
+			var scaledWidth = Math.min(video.videoWidth, 1024);
+			var scaledHeight = scaledWidth * (video.videoHeight / video.videoWidth)
+      canvas.width = scaledWidth
+      canvas.height = scaledHeight
+      var ctx = canvas.getContext('2d')
+      ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, scaledWidth, scaledHeight)
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      var decoded = jsQR.decodeQRFromImage(imageData.data, imageData.width, imageData.height)
+      if (decoded) {
+        this.onDetected(decoded)
+      } else {
+        setTimeout(this.tryScanQR.bind(this), 500)
+      }
+    },
+    async onDetected(data) {
+      try {
+        data = JSON.parse(data)
+        this.status = 'verifying'
+        var iotaBalanceClient = window.global.iotaBalanceClient
+        var iotaConnector = new discipl.connectors.iota(Mam, iotaBalanceClient.iota)
+        var localConnector = new discipl.connectors.local()
+        iotaBalanceClient.setOnChangeNode((iota) => {
+          iotaConnector = new discipl.connectors.iota(Mam, iota)
+          localConnector = new discipl.connectors.local()
+          discipl.initState(iotaConnector, null)
+          discipl.initState(localConnector, null)
+          this.status = 'retrying'
+        })
+
+        this.scannedData = JSON.parse(data.data)
+        const pKey = data.pKey
+        const did = await discipl.getDid(localConnector, pKey)
+        var verified = await iotaBalanceClient.context(async (iota) => {
+          return await discipl.verify(iotaConnector, did, data.attestorDid, data.data, did)
+        })
+        console.log('verified', verified);
+        if (verified) {
+          this.status = 'correct'
+        } else {
+          this.status = 'incorrect'
+        }
+      } catch (e) {
+				Raven.captureException(e)
+				console.error('scan error', e);
+        this.status = 'error'
+      }
+    },
+    reset() {
+      this.status = 'idle'
+      this.scannedData = null
+      this.bsn = ''
+    },
     scan() {
-			this.scannedData = null
-			this.status = 'scanning'
-      load(this.$refs.qrCanvas, this.onDetected.bind(this))
+      this.scannedData = null
+      this.status = 'scanning'
+      this.load()
     }
   },
   data() {
     return {
-			displayNames: {
-				birth_city: "Geboortestad",
-				birth_date: "Geboortedatum",
-				username: "Naam",
-				"@id": "DID"
-			},
-			status: 'idle',
+      displayNames: {
+        birth_city: "Geboortestad",
+        birth_date: "Geboortedatum",
+        username: "Naam",
+        "@id": "DID"
+      },
+      status: 'idle',
       selectedChannel: 1,
-			scannedData: null,
-			bsn: ''
+      scannedData: null,
+      bsn: ''
     }
   }
 }
@@ -306,13 +183,6 @@ img.stateIcon
 
 	//.val
 
-
 .workaround
-	overflow hidden
-	position absolute
-	left 0
-	top 0
-	width 5px
-	height 5px
-	z-index -1
+	display none
 </style>

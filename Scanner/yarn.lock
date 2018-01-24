@@ -2463,6 +2463,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+git-revision-webpack-plugin@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/git-revision-webpack-plugin/-/git-revision-webpack-plugin-2.5.1.tgz#3fb4398f376cf27678d6de96ba2669b518645e78"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -2863,6 +2867,15 @@ iota.crypto.js@iotaledger/iota.crypto.js:
   resolved "https://codeload.github.com/iotaledger/iota.crypto.js/tar.gz/05c5b4485ad8232fd5b9145e02fe988a035a7704"
   dependencies:
     crypto-js "^3.1.9-1"
+
+iota.lib.js@^0.4.2:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/iota.lib.js/-/iota.lib.js-0.4.6.tgz#47afdc03d57c7f55d2f58f068db492df6bc6e9bb"
+  dependencies:
+    async "^2.5.0"
+    bignumber.js "^4.1.0"
+    crypto-js "^3.1.9-1"
+    xmlhttprequest "^1.8.0"
 
 "iota.lib.js@https://github.com/l3wi/iota.lib.js.git":
   version "0.4.4"
@@ -3685,12 +3698,13 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
-"mam.client.js@https://github.com/peterwilli/mam.client.js.git#vuejs-compat":
+"mam.client.js@https://github.com/peterwilli/mam.client.js.git#vue-compat":
   version "0.0.1"
-  resolved "https://github.com/peterwilli/mam.client.js.git#84f6a9ef41a430d309843a0e2ee5cd2432d47a87"
+  resolved "https://github.com/peterwilli/mam.client.js.git#275b1dec5af5b1e7e77a3523e06208839118d814"
   dependencies:
     babel-polyfill "^6.26.0"
     iota.crypto.js iotaledger/iota.crypto.js
+    iota.lib.js "^0.4.2"
     pify "^3.0.0"
     rust-wasm-loader "^0.1.2"
 
