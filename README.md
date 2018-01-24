@@ -6,3 +6,7 @@ This project is an example of how to use the IOTA tangle to publish certificates
 
 Please feel free to file Issues and Pull Requests against this project. Thanks for contributing.
 
+## Licence
+
+© 2018 Gemeente Haarlem  
+This project is licenced under the [GNU General Public Licence](LICENCE)
