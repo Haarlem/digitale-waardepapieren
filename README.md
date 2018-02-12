@@ -1,6 +1,6 @@
 # Digitale Waardepapieren
 
-Status: Proof of Concept
+![Status: Proof of Concept](https://img.shields.io/badge/Status-Proof%20Of%20Concept-lightgrey.svg)
 
 This project is an example of how to use the IOTA tangle with the discipl-code library to publish certificates. These replace the certificates we have to print on expensive forge-proof paper, increasing the speed of and decreasing the cost of our digital service delivery.
 
