@@ -10,5 +10,5 @@ Please feel free to file Issues and Pull Requests against this project. Thanks f
 
 ## Licence
 
-© 2018 Gemeente Haarlem  
+© 2018 [Gemeente Haarlem](https://haarlem.nl)  
 This project is licenced under the [GNU General Public Licence](LICENCE)
