@@ -16,3 +16,22 @@ Blockchain technologies have a lot of potential in government applications. We w
 The process of getting a 'proof of registration' is a mostly paper process. Although the citizen can request a 'proof of registration' they will have to go to city hall to identify themselves, pay €25 in fees and receive the paper document.
 
 Thus we've decided on building a proof of concept for the digitisation of the 'proof of registration' using blockchain technologies.
+
+## How it works
+
+### Providing verifiable claims
+
+![Graph of the Scenario](./assets/scenario-graph.svg)
+
+Citizen claims (claim) data to be proofed, municipality attests claim (attest), housing corporation verifies attestation on claim (assert)
+
+### Technology
+
+This is the same pattern as can be found in a Self Sovereign Identity Platforms (SSIP) such as
+Sovrin, uPort, Techruption, Blockcerts. We're using [Discipl Core](https://github.com/discipl/core), developed by ICTY, as an API for, amongst other functions, leveraging a distributed SSIP.
+
+We've used [Tangle](https://iota.org/IOTA_Whitepaper.pdf) as opposed to blockchain because there are:
+
+* No miners: no fees, no power in the hands of the few
+* Scalable: more nodes, more transactions, more throughput
+* Quantum safe
