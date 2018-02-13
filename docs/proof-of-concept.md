@@ -1,6 +1,6 @@
 # This proof of concept
 
-This proof of concept is made to digitise an existing common process for the City of Haarlem: in order to register with a social housing cooperative a citizen needs to present them with a 'proof of residency'. This currently involves the citizen going to city hall to get their certificate of 'proof of residency' and then take this to the housing cooporation.
+This proof of concept is made to digitise an existing common process for the City of Haarlem: in order to register with a social housing cooperative a citizen needs to present them with a 'proof of registration'. This currently involves the citizen going to city hall to get their certificate of 'proof of registration' and then take this to the housing cooporation.
 
 This project proofs that this can all be done with digital certificates – or [verifiable claims](https://www.w3.org/TR/verifiable-claims-use-cases/) – citizens can print themselves.
 
