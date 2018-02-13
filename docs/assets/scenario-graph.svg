@@ -6,6 +6,10 @@
         Citizen claims (claim) data to be proofed, municipality attests claim (attest), housing corporation verifies attestation on claim (verify)
     </desc>
     <style>
+        text {
+            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18pt;
+        }
         .entity-background {
             fill: white;
             stroke: #cc242D;
@@ -15,9 +19,6 @@
             fill: #D92F38;
             stroke: #cc242D;
             stroke-width: 2;
-        }
-        text {
-            font-size: 18pt;
         }
         #attestations text, #claim text {
             fill: white;
@@ -72,7 +73,7 @@
         </g>
         <g id="retrieve">
             <use class="transaction-line" transform="matrix(0.356092 -0.934451 0.934451 0.356092 620.855 -95.3779)" xlink:href="#retreive-line"/>
-            <text transform="translate(552 -184)">Retreive</text>
+            <text transform="translate(546 -184)">Retreive</text>
             <g id="retreive-transaction-icon">
                 <use transform="translate(642 -218)" xlink:href="#transaction-icon-background"/>
                 <use transform="matrix(0.707107 -0.707107 0.707107 0.707107 645.577 -192.077)" xlink:href="#transaction-diamond"/>
