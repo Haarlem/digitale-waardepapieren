@@ -29,6 +29,7 @@
             fill: white;
         }
     </style>
+
     <g transform="translate(-542 431)">
         <g id="attestations">
             <use xlink:href="#graph-graphic" transform="matrix(0.1 0 0 -0.1 1346 -62)"/>
@@ -72,7 +73,6 @@
         <g id="retrieve">
             <use class="transaction-line" transform="matrix(0.356092 -0.934451 0.934451 0.356092 620.855 -95.3779)" xlink:href="#retreive-line"/>
             <text transform="translate(552 -184)">Retreive</text>
-            <g>
             <g id="retreive-transaction-icon">
                 <use transform="translate(642 -218)" xlink:href="#transaction-icon-background"/>
                 <use transform="matrix(0.707107 -0.707107 0.707107 0.707107 645.577 -192.077)" xlink:href="#transaction-diamond"/>
@@ -96,6 +96,7 @@
         </g>
 
     </g>
+
     <defs>
         <path id="claims-retreive-line" 
             d="M 0 -2.22045e-16L 229.715 -2.22045e-16L 229.715 -4L 0 -4L 0 -2.22045e-16Z"/>
@@ -148,4 +149,5 @@
             d="M 50 20L 50 0L 0 0L 0 90L 100 90L 100 20L 50 20ZM 20 80L 10 80L 10 70L 20 70L 20 80ZM 20 60L 10 60L 10 50L 20 50L 20 60ZM 20 40L 10 40L 10 30L 20 30L 20 40ZM 20 20L 10 20L 10 10L 20 10L 20 20ZM 40 80L 30 80L 30 70L 40 70L 40 80ZM 40 60L 30 60L 30 50L 40 50L 40 60ZM 40 40L 30 40L 30 30L 40 30L 40 40ZM 40 20L 30 20L 30 10L 40 10L 40 20ZM 90 80L 50 80L 50 70L 60 70L 60 60L 50 60L 50 50L 60 50L 60 40L 50 40L 50 30L 90 30L 90 80ZM 80 40L 70 40L 70 50L 80 50L 80 40ZM 80 60L 70 60L 70 70L 80 70L 80 60Z"/>
 
     </defs>
+
 </svg>
