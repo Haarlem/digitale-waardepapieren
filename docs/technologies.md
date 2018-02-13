@@ -1,20 +1,24 @@
 # Technology
 
-## SSIP
+## Discipl SSIP 
 
 The pattern used in this [proof of concept](proof-of-concept.md) is the same pattern as can be found in a Self Sovereign Identity Platforms (SSIP) such as Sovrin, uPort, Techruption, Blockcerts. We're using [`discipl-core`](https://github.com/discipl/core), developed together with ICTU, as an API for, amongst other functions, leveraging a distributed SSIP.
 
+More about on the [ICTU Discipl site](https://discipl.org/)
+
 ## IOTA Tangle
 
-We've used [Tangle](https://iota.org/IOTA_Whitepaper.pdf) in `discipl-core` as opposed to blockchain because there are:
+We've used Tangle in `discipl-core` as opposed to blockchain because there are:
 
 * No miners: meaning no fees, no power in the hands of the few
 * Scalable: meaning more nodes, more transactions, more throughput
 * Quantum safe
 
+More about the IOTA Tangle in the [Whitepaper](https://iota.org/IOTA_Whitepaper.pdf) and with the [IOTA Foundation](https://iota.org/)
+
 ## MAM Channels
 
-Masked Authenticated Messaging is a communication protocol to emit and access encrypted information on the Tangle.
+Masked Authenticated Messaging is a communication protocol to emit and access encrypted information on the [Tangle](#iota-tangle).
 
 In private mode the initiating party generates random adress under which an encrypted message is published referring to a next random adress (that can only be generated with the private key of the initiating party) and where the next message will be found. This means a channel can be joined from any message, however messages before the message used for joining are not retrievable.
 
