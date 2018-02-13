@@ -28,9 +28,9 @@ Citizen claims (claim) data to be proofed, municipality attests claim (attest), 
 ### Technology
 
 This is the same pattern as can be found in a Self Sovereign Identity Platforms (SSIP) such as
-Sovrin, uPort, Techruption, Blockcerts. We're using [Discipl Core](https://github.com/discipl/core), developed by ICTY, as an API for, amongst other functions, leveraging a distributed SSIP.
+Sovrin, uPort, Techruption, Blockcerts. We're using [`discipl-core`](https://github.com/discipl/core), developed together with ICTU, as an API for, amongst other functions, leveraging a distributed SSIP.
 
-We've used [Tangle](https://iota.org/IOTA_Whitepaper.pdf) as opposed to blockchain because there are:
+We've used [Tangle](https://iota.org/IOTA_Whitepaper.pdf) in `discipl-core` as opposed to blockchain because there are:
 
 * No miners: no fees, no power in the hands of the few
 * Scalable: more nodes, more transactions, more throughput
