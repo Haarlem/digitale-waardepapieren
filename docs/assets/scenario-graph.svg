@@ -3,7 +3,7 @@
         Digitale Waardepapieren Scenario Graph
     </title>
     <desc>
-        Citizen claims (claim) data to be proofed, municipality attests claim (attest), housing corporation verifies attestation on claim (verify)
+        Citizen claims (claim) data to be proofed, Public Administration attests claim (attest), Housing Cooperative verifies attestation on claim (verify)
     </desc>
     <style>
         text {
