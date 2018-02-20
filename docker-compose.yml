@@ -1,4 +1,4 @@
-version: '2'
+version: '0.1.0'
 services:
   claim_page:
     image: node:9.2.0
