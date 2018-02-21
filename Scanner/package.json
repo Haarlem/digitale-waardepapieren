@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "discipl-core": "https://github.com/discipl/core.git#functional-api",
-    "iota.lib.js": "https://github.com/l3wi/iota.lib.js.git",
+    "iota.lib.js": "git+https://github.com/iotaledger/iota.lib.js#master",
     "jsqr": "^0.2.2",
     "mam.client.js": "https://github.com/peterwilli/mam.client.js.git#vue-compat",
     "pug": "^2.0.0-rc.4",
