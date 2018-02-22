@@ -14,16 +14,12 @@ This proof of concept is made out of three components that the three handle disc
 * [ClaimServer](./ClaimServer/README.md): A server for the public administration that can handle the claim for a certificate and return it to the client of the _ClaimPage_.
 * [Scanner](./Scanner/README.md): A webserver that hosts the web-app that can be used to scan the generated QR code and verify the certificate.
 
-## Building, Installing and Running
-
-With Docker you can instantiate the whole stack of components of this proof of concept using `docker-compose up`.
-
 ## How to install and run
 
 We've 2 separate docker-compose files for both development and production.
 For both environments you need [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install).
 
-### Development
+### Development and Proof of Concept
 
 Development mode is easy to set up with just 1 command, the Docker VM will also autoreload when making changes.
 The full stack can be obtained and started by doing the following:
