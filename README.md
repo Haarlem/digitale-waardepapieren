@@ -1,13 +1,25 @@
 # Digitale Waardepapieren
 
-This project is an example of how to use the IOTA tangle with the discipl-code library to publish certificates. These replace the certificates we have to print on expensive forge-proof paper, increasing the speed of and decreasing the cost of our digital service delivery.
+This project is an example of how to use the [IOTA](iota.org) [tangle](https://learn.iota.org/faq/tangle) with [Discipl](https://discipl.org/) library to publish digital [verifiable claims](https://www.w3.org/TR/verifiable-claims-use-cases/). These digital certificates replace the certificates the City of Haarlem has to print on expensive forge-proof paper. Thus increasing the speed and decreasing the cost of our digital service delivery.
+
+* [Why we've made this this Proof of Concept.](docs/proof-of-concept.md)
+* [The scenario this Proof of Concept fulfills](docs/scenario.md)
+* [The technologies we use, why we've used them and how they work](docs/technologies.md)
+
+## Components
+
+This proof of concept is made out of three components that the three handle discrete steps set out in [the scenario](docs/scenario.md).
+
+* [ClaimPage](./ClaimPage/README.md): A webserver that hosts the web-page where citizens can download their certificate.
+* [ClaimServer](./ClaimServer/README.md): A server for the public administration that can handle the claim for a certificate and return it to the client of the _ClaimPage_.
+* [Scanner](./Scanner/README.md): A webserver that hosts the web-app that can be used to scan the generated QR code and verify the certificate.
 
 ## How to install and run
 
 We've 2 separate docker-compose files for both development and production.
 For both environments you need [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install).
 
-### Development
+### Development and Proof of Concept
 
 Development mode is easy to set up with just 1 command, the Docker VM will also autoreload when making changes.
 The full stack can be obtained and started by doing the following:
@@ -36,5 +48,5 @@ Please feel free to file Issues and Pull Requests against this project. Thanks f
 
 ## Licence
 
-© 2018 Gemeente Haarlem  
+© 2018 [Gemeente Haarlem](https://haarlem.nl)  
 This project is licenced under the [GNU General Public Licence](LICENCE)
