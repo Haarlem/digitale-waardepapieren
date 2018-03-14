@@ -1,0 +1,35 @@
+version: '2'
+services:
+  claim_page:
+    image: node:9.2.0
+    user: "node"
+    working_dir: /home/node/app/ClaimPage
+    command: 'bash -c "npm install && npm run dev"'
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 8080:8080
+    environment:
+      HOST: '0.0.0.0'
+
+  claim_server:
+    image: node:9.2.0
+    user: "node"
+    working_dir: /home/node/app/ClaimServer
+    command: 'bash -c "npm install && npm run start"'
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 8082:8082
+
+  scanner:
+    image: node:9.2.0
+    user: "node"
+    working_dir: /home/node/app/Scanner
+    command: 'bash -c "npm install && npm run dev"'
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 8081:8080
+    environment:
+      HOST: '0.0.0.0'
