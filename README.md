@@ -26,9 +26,9 @@ The full stack can be obtained and started by doing the following:
 
 * Run `docker-compose -f docker-compose.dev.yml up -d`
 * When done, you can access the:
-  * [ClaimPage public administration website](http://localhost:8080)
-  * [Scanner](http://localhost:8081)
-  * [ClaimServer API](http://localhost:8082)
+  * ClaimPage public administration website on <http://localhost:8080>
+  * Scanner on <http://localhost:8081>
+  * ClaimServer API on <http://localhost:8082>
 
 ## In production
 
