@@ -1,6 +1,8 @@
-# scanner
+# Scanner
 
-> A Vue.js project
+A webserver that hosts the web-app that can be used to scan the generated QR code and verify the certificate.
+
+![Screenshot of the Scanner](screenshot.png)
 
 ## Build Setup
 

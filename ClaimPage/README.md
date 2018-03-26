@@ -1,6 +1,10 @@
-# claim-page
+# ClaimPage
 
-> A Vue.js project
+A webserver that hosts the web-page where citizens can download their [Verifiable Claim](../docs/scenario.md) PDF.
+
+The design and most page elements are copied from the website of the [Gemeente Haarlem](https://www.haarlem.nl/inwoners-en-ondernemers/).
+
+![Screenshot of the ClaimPage](screenshot.png)
 
 ## Build Setup
 

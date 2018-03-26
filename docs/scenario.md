@@ -34,6 +34,8 @@ In this proof of concept the Public Administration server side work is done by t
 
 On the website of the Public Administration the Citizen can authenticate using a trusted authentication method (like DigiD in the Netherlands, GOV.UK Verify in the UK or login.gov in the US) and requests a 'proof of registration'. (This step has been omitted in this proof of Concept, and just an example file will be given.)
 
+![Screenshot of the ClaimPage](../ClaimPage/screenshot.png)
+
 The Public Administration will now get the information it needs for the 'proof of registration' from the civil registries and provides this to the Citizen's computer in a linked data JSON-LD format.
 
 ### b. Citizen creating the claim and the Public Administration creating the attestation
@@ -42,6 +44,8 @@ The Citizen's computer locally verifies the information to be correct and doing 
 
 The Public Administration publishes a hash (derivative that can only be created and verified, not reverse engineered) of the information and the secret on the MAM channel as an attestation. This means the actual information is not readable for those subscribed. A reference to this message together with the information and secret – the claim – is rendered in a digital 'proof of registration'. The Citizen can later use this to verify the claim.
 
+![PDF of the Verifiable Claim](assets/attestation-pdf.png)
+
 The digital 'proof of registration' is, in this proof of concept, a PDF or a printed sheet with a QR code that holds the claim.
 
 ## 2. Verification
@@ -49,6 +53,8 @@ The digital 'proof of registration' is, in this proof of concept, a PDF or a pri
 The Citizen can now go to the Housing Cooperative and provide them, either in paper or digitally, with the digital 'proof of registration'.
 
 The verification tool can read the digital 'proof of registration' and craws the MAM channel untill the claim is found. The verification tool now tests whether the hash provided by the Citizen equals the hash provided by the Public Administration on the MAM channel.
+
+![Screenshot of the Scanner tool](../Scanner/screenshot.png)
 
 The fact the hash of the information and secret exists in the channel in which only the Public Administration can add messages to proves that the Public Administration earlier identified a person with the same information and knowledge of the same secret as provided by the person now in contact with the Housing Cooperative.
 
