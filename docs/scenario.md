@@ -42,6 +42,8 @@ The Citizen's computer locally verifies the information to be correct and doing 
 
 The Public Administration publishes a hash (derivative that can only be created and verified, not reverse engineered) of the information and the secret on the MAM channel as an attestation. This means the actual information is not readable for those subscribed. A reference to this message together with the information and secret – the claim – is rendered in a digital 'proof of registration'. The Citizen can later use this to verify the claim.
 
+![PDF of the Verifiable Claim](assets/attestation-pdf.png)
+
 The digital 'proof of registration' is, in this proof of concept, a PDF or a printed sheet with a QR code that holds the claim.
 
 ## 2. Verification
