@@ -4,6 +4,9 @@
 
 This project is an example of how to use the [IOTA](iota.org) [tangle](https://learn.iota.org/faq/tangle) with [Discipl](https://discipl.org/) library to publish digital [verifiable claims](https://www.w3.org/TR/verifiable-claims-use-cases/). These digital certificates replace the certificates the City of Haarlem has to print on expensive forge-proof paper. Thus increasing the speed and decreasing the cost of our digital service delivery.
 
+We believe there are many more applications for digital verifiable claims in public administrations. This [proof of concept](docs/proof-of-concept.md) demonstrates where we can start.
+However, once these verifiable claims are digital many others can also be digitised on the same infrastructure, dramatically lowering the barrier to using verifications.
+
 * [Why we've made this this Proof of Concept](docs/proof-of-concept.md)
 * [The scenario this Proof of Concept fulfills](docs/scenario.md)
 * [The technologies we use, why we've used them and how they work](docs/technologies.md)
