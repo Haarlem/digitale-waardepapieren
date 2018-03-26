@@ -1,3 +1,12 @@
+/* Styling to make links with no href have the illegal cursor */
+
+a:not([href]) {
+  /* Styles for anchors without href */
+  cursor: not-allowed;
+}
+
+/* Haarlem styling */
+
 .overflowh, .visuallyhidden {
   overflow: hidden
 }
