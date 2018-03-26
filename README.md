@@ -1,6 +1,6 @@
-# Digitale Waardepapieren
+# IOTA Verifiable Claims Proof of Concept
 
-Status: Proof of Concept
+Status: 👩‍🔬 Proof of Concept
 
 This project is an example of how to use the [IOTA](iota.org) [tangle](https://learn.iota.org/faq/tangle) with [Discipl](https://discipl.org/) library to publish digital [verifiable claims](https://www.w3.org/TR/verifiable-claims-use-cases/). These digital certificates replace the certificates the City of Haarlem has to print on expensive forge-proof paper. Thus increasing the speed and decreasing the cost of our digital service delivery.
 
