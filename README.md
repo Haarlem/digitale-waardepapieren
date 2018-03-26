@@ -1,3 +1,5 @@
+<img src="ClaimPage/src/assets/logo.png" align="right">
+
 # Digitale Waardepapieren
 
 This project is an example of how to use the [IOTA](iota.org) [tangle](https://learn.iota.org/faq/tangle) with [Discipl](https://discipl.org/) library to publish digital [verifiable claims](https://www.w3.org/TR/verifiable-claims-use-cases/). These digital certificates replace the certificates the City of Haarlem has to print on expensive forge-proof paper. Thus increasing the speed and decreasing the cost of our digital service delivery.
@@ -40,9 +42,9 @@ This manual assumes you've got a working version of NodeJS (min v6) installed.
   * Run `npm run build`
   * Now you can use the output in the dist-folder to host said page. The files in dist are static, so a simple static file server would suffice.
 
-## Contributing
+## [Contributing](CONTRIBUTING.md)
 
-Please feel free to file Issues and Pull Requests against this project. Thanks for contributing.
+Please feel free to [file Issues and Pull Requests](CONTRIBUTING.md) against this project. Thanks for contributing.
 
 ## Licence
 
