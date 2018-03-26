@@ -21,7 +21,7 @@ This proof of concept is made out of three components that the three handle disc
 
 ## Trying it out and running the dev environment
 
-We've 2 separate docker-compose files for both development and production.
+We've created separate docker-compose files for both development and production.
 For both environments you need [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install).
 
 Development mode is easy to set up with just 1 command, the Docker VM will also autoreload when making changes.
