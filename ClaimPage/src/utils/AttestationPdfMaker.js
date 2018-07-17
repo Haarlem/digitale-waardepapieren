@@ -1,24 +1,32 @@
 var jsPDF = require('jspdf')
-var margin = 15; // margin in mm
-var logoData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAACnCAQAAACS9YmfAAATLklEQVR4Ae3de5jOZf7A8c+cnGVynBo5C9XGUhK1KmmTQ46bFSXa3bIq4qfCyla7va0z2YlyDJUobQYdSM5KK2orKdkYK0qMwzCMz8/1ve7rvq7v9Xzn6Yl5xvNw97rqP10u7+c+zww5v/+hLvcwljfYS7axizeZwViG8gBdaUEDqnMREpHf8xgpSLwTzl8deR2NSDabyWQW4xnGI/SkE7/lJppwDc24hVZ0ox8T+A/Kg0isctGbsQItcC8hscpF/ysaBXOQWOWiv4ZGwdNIrHLR30ML2E6mUguJVS76EtTYzDQepTttuYXmXEfj05pxMy24g/Z0pScP8DCDGAZMYCqzmM8SFnkW8xYzeJZ+dKYBSUjsctFHoyhb6ElVxLkQordByeNPyC+ScpqLHqcSUb6hNhKh9ixjEav4F8Vc9Hi1niyKIBG7DfV0cdN7vGrH3ohH7GW0QhCOoryOINSgkoseb1J5inQkQi1RRvMrtqEM5AYmsMVFjz/lKI9E7BnUcww1/uKm9/NHQsAZuzSnULI5gpKLemq76OeLyxkdEP0KHqMWwnMoO2jAGHZxmYt+vljHdiQYaRxEyUEQilDSRT8/pKH8FwnUCDX+iMQzFz0RweJJlLzAibsog5nMIP7CuwwO/tVWY35Dgoseu8owkPqIsRVF6RnwwUhCAlI35QXqIliU5U2Um91Ij2UJ9EVZxUAqk8BhFGU0QgKX0pDOTKNLmHv2kqxEyeR6xHMDP6AMdtN77NuAopxkKyfNW/givuMEijKL6sHLgfU9ijIJ4UYUZbtb0+NBLTQYbRGfm0gKuMxVz0pzcdPPRY8Pj5CH+vEJVyA+HVmMBNiEWqco6aLHh6vIRX3eQkKs5H9IgGrkocZJpp02nuEMprGLHru6cxD140vaIH4oGwPf33qQi4bYzB0uemxqxjw0GB0QLDqgvB4yxuE4GuI7OrjpPRYl0pKPUOsQGqI8Yi1EmY8YpehNJhroXUq5NT02JdGM3gzkWaAPtRmIGttQ43N7s5bIEZQFiHERkzmIBpjiNnLxozXqySGRW3iJFWxgJ53MybwLivIy4pNKY4bxAYpFSxc9fqShnmUIFpVM9HdRlBlIgAEoFu+76PFkGYryWyREitmuZQRexR5AUb6gjbnRq+6ix4/HUfYhATqinrFIiCtQz40I16Io97ro8eMmlAlIgDdQzzNIiLrYid9k3+Cix4/LUJogAX5EPU8gIcqhKGK1R7nSRY8XF/EqqUiIBqjxSODjrDIEwaI3PV30+FGDZCTEQNTojYSozAjEj+IuerxbhxpdkRBlKYrEGxe9WNjn0NKcRI07kfODiz6Am5B8NUetFkgYyVR30ePF+7QO+5FQqykSxl30dtHjRQ73hr+nsxohRjEkxG76uejxoQTK84gf1c37WlEOoNZViFGKCdRBsOiM0tFFjw/pKIcQLG5lub1euYRTqFULsf7p29ilkIPS00WPD/VQlIfMpN2LTJT+iJFOHmpVQ7BQlEyuQRCmoCiDXPQYFHBtUg1FOcjV/JXdKMoixKrAMdTIIx3BsKGVx0khG0UZiGCR6KLHgmvpiJDO37keMdqg+BVFrIoczzd6BdT4isMoyiRa0517GMRMWlPERY8F83gUoQgjUQ6zimVs4QSKxRFuxv+cchQ1jlERCRjrQSaT5qb3WJBIHu0Qz51ooF34b+dK8RNq5FAe8SnCOjTEHq5xa3qs6OQ7dF3EVDRADg0Rqxj7sCOdCgh+3VD8tsXSGHfRl6BUwb9zf4ZTKH6HSUGMFP6X75qeyggOoj5ZsbWSu+iHUNJDn02t46gxA7H+Gxi9NMPQAN+T4KLHjqrY6xWrOIrFIXoyic9RlE6IsS3knJ5ALaZzlCN8z7csYzuKxUgXPda+rr1J4Bc8+qPWZDDzqIp4PkWt2iZ6mlkmiiAIk1EscijposeKPwd8perHKAfoyJVmZb8RMRKpYCbqjah1NRLgRbPvz0A9vVz0WPE0ijIR/9ifa45hb4RO/sZa1LoWCfAUitIZoS5zUA676LHieRTlB7szb8he+iPGbSg/khz42q7WDUiA7ihZiHELO/kHSS56LJiEetognmb41/cc9iABFqLW7UiABiiTECw6UMpFjwVPEv57zaazEwkwDbW6IAGKcITOSOxx0fsSfmVuyHgSkRAjUas3Eug5bnDRY1Fb1NiMBKoYeJs2BLUGIIGaUd1Fj0XVUasXErFHI/rL9RJd9Ni0CzUOUw6J0J9QaxISM5IoycWknVaJNCqSSgmSkSj5lRCfpqDWOiRCd6PWXMRIQgpdGtdzN0N4jfV8SRY/cYTc0457/x5mP1l8zaesZQn/ZCgP0o3buJZaXEziWV1gv8BvhPhUF8ViDBKRa1BrmXl5m08WTZBCUowWwGZy0TN0hJ1sZjmTGERPWtOE2pSN6IN7CY+SR39EiFcbUSzuRgjWg9sQTyUeQK3jfHHabtQzn9uRKKvHSPagUXCULD5lJXN5mkfpRRdacRPX0ZAGXMNNdOVJcxv5JySeozdCfdqEOdEvZD0/oWHdEuV3wdfQc+wEzeP/q2HfQn2aIj4J3I36HOOoPeotJ4PBDGUPyntRfk0bQC56jr1EKhL/0VPJQX3uQLCoxGHUc5L6lDutNPVRTznEKEMLJKpeRs+xmTSJnSNbddrxRwbzLOOZwN/pQ2OEyN0e9seBJlOTB8hkH/cgVg6Kko4UkrfRcyaPpfSnTiyc0yvTnVEsYRsaYCP9kYg9g1r5XdaUQLD4FuUUVZBCsSAkw1e8xTRG8Rf680fu5S460M6n02nduJfePMDD9OMxnuQZRjCaiUxhGrN5lQUsZDFvs+K09WzmE2MLG1jMbEbxELdT+dxfzqTRkTGs4QRKeMtJRSI0H8VvKBLGepSThTTSX0CNlYyhJ9dT+cK5kbucPzCXY2jEPiMZidAaFL/nkXwtRjlGKhJ1j6EomxhMjQvrGrYef2YxegYGIhFKYQuKXyaJSKBZKLlI1N2Ksp8+sX73fjGJBZq7L0vQM7YFiVhJvkTx28RlSIhKfIWiLOJqJIouQWP372oWLPayGikAV/IQG8PsKA+wkx2eLH7iJBroBBcjESvOZyh+2TRF8PsENf6BRFEW++Phle01c6KTs3Atg9mChshiLbMZTjvqcxml7IySTEnSacDvGMcH5KA+v0aIXDJr0BCdEZ9F9uQezXV2NMqlsR99JGqsouYZTGZtmMQO1GcPK3iO31Gb5Ah398M4gFpVkV9oJhriUXxLmDk7PIZETRk7eGI6+p/xT6wjI1yNqtCZyWwkF8XiG2bRg/oURX6xCnaa3kMC8ov1Q0OMRbBoipJLIhI1i1BaxHr01oHvNm9wP/VC7qRLUY3r6M14lrAd9fmaKdxFHeSsVDLT/DvIGWnODyh+ryJYvMZcJGpqoyjNYzt6VzSM/XzFv1nLOj7mM3ZwAA3xCePoxuVIAVmLovRAzlBawKnhHRIQI4EKSNT8C0XpFNvR56NnaDMT6c6VSAFbjbK1IL4Hxmc9RZCouxj1PBbb0RP5P3JRIreBsdGIbR1GqYOcpS7koj4bkajrgXrmx/5Grhoj2IaGcYpPmc8w2lMTiaq7UPoW0OXvBtRnLSlINNmF5QilYzq61YFRLOUL9pNz2gF28DGLeZ5BdKIqUkgOshUpMLNRnw+RKEohGzWax0V0qwTlTyuFnAM90AJeOIaiPq8gUVMDtXrHfvTYkIjyI1LAugc85URHA9Qa6qJHZhLKi0iBu56jKBbVkaioj1q46JH/JJlhURqD2ai1CImKKqg1zEWPxMiorrk1OYRaV0dpefoBNXq46D+vKD+iKAeRKLkKtYYjUfEKatR00X9eE9Toi0TJTaixGImK39m3SnHRf1431LoMiZL29oU/GYmCK1FPaxc9Evej1jdRvM8agqIcpywSBRU4ibIZiYSL3hXF4ssojvYPUA5RBomCUuRFvk100a9DffbRDomKsigHSESi4GaUiUhkXPRi7EfxG0MJJAo2sQeJimy+QFz0yGWgIXbQFSlwo1mGRMFClJK46ESuERpoGb9FClR/BiMFbirKrxAXvaC+w3N9ga7wDQv86qQEq84suYt+MafQfH3NQ1yCxKCWnEC5CnHRz0RzNKxjLKQdKUjMqMtilO8oi7joZ6oj+rN2MYPbKIKcY/WYjaLMQ+KJEHua8CMagd3Mo8c5m/Dbshj19EFc9LOXxjw0QsdZz3P0oDJSSFoxiW9Qz3IaIC56QbmHLJTIneBDpvIIzaO24qfTi6lsRY3DPIzEIyF2lWY4x9BfbDermcYgunBFAVy2JtGYB8lgLbkoFuNJR1z0aKjC03yHnrGdbGABExlMb9pyA1dSOexTSzLlqU0T2vIAf2M2a9iF4neKKTRC4pcQ+1J4hJVoAcnjEF+zjrdZyDxe4VVe9f67kHf4iN3koGHsZTyXI/FNiBc3MJ6t6Dm0kgGURuKfEF/aMpEtaCH7NyNoipwvhHhUg4dYwHY0yvbxNgOpjZxfhHh2Ob2Yznr2oQXoJNt4k+E0sa/5LnoMKs5V3Ek/ZrKR3eSiv9hBvmIF/+A+biQdsVz0uJBMGvW5la70YQjjWMBy1vAhG/mIjXzIWj5gCXMYxWD60IPbaUyN2N6gueiOi+646I6L7rjojovuojsuuuOiOy6646I7LrrjojsuuuOiOy6646I7LrrjojsuuuOiOy6646K76I6L7iS46BeOG3iK1XxLVRf97KWQSlGSsEimOGVIRLAoTSlSSMIihVKURoi+HrzDDtSo7aKfvZZkoyhZxm4U5QcuRbBYwQmUA2QZB1BO8S5C9I3kOGrVcNHPXlluoy97UOt97qMFRRAsGtGRcSgWk+hCI6SQNGCri17QStvRtBXJ1+Oo8XekkD3rohe8LahnKpKvWqjRCilko1z0grcK9YxH8lUNNVoihWysi17wVqKeMRFFv9VFP59G+lgkXzXcSHfRXfQLPnpJ+rGCLSxiJA2RQE2Zy2bWMIf7SULwK0EHXuevCMJQFtKLiggJPxv9el5nE9+xgkFUQUJcwRgyqYh4UvkDr7KUcVRCrOJ0YzZLyaDahRd9FJKvymGiDyMPJRs1MhD8mvARSg6HUM+3XI4YNfg9C9iHoqxAGI56cniXxLDRq7Ic5T2GmXuEk4xAjGJcy0h7LimLkE4mah3gEgShFNNR6zj1Lqzo4U/gZQiOXp4NKMu5CCGJF1DPQwgWg7FHPRqbW4HdlEA8U1GrP5ei1othp/fGHEXpYn8fWSjKDMRzK2rtpwSjUPYyBfgO9cxCeAolh1k8ay+APr/Qov/IZ3wR6D98HRg92Yyl+xDjCIqyBbF+j6L8BzFGoJ6OdsptzYvkoSjT2cJsHmaNHZ/5Ra/gJV+CWPeinubmyqkZD5ODovzEIf5LV8RTzswqR/ic/fbjWYQs1FP3wokeuZYBf9B/QIyNKMpOxDqKoqyiGOJphXoGIFgmjzLdjtSeSJjoC0J+L+VRz5uINQ/1TECwGI96lpKIWANQT6cLK/o/KU2ZQKWpHxi9FRsZTh3EWo6i7ECsxae1J8m+hv8mIHo5joWZXEOj10FRjiI+q1GUbIojxvNmrRefQainAoJFO9RzD25NN1Kx0SP4f21H8nWNXb/FqmCiT44w+uNm27WBj/jY2IAaWxBjhol+aWD0axEsOqCe7kjk3Dm9DrPIDR+dPnzLqXyjz4kw+hwU5RCzmI3F33jitKEMDImeHvh41BjBohPquRuJhItejNtYwhFeYW2+0WvxBAfZzERO5ht9boTR30ZR9iLBoh3dRW/AZPaj7KMJQmZA9AR6m8l3NEIV9Kyjv4N60s9FdBf9QdQzHPGsCYmeyqcoShY1EYTbCyD6fNRzf6FHd69sdlM2I8xGbpE5K5dBPC3POHp1xHgK9Xx5VtH9G7mOF+ZIDxe9SuBIH+f/g7IT7zeIUcps2z5AjPqopx9ilTXn9JeQACNRTzXEaIoaPRE//kVfxHjBRE9DsBiIehohWNyJeu66IKLbK8hpSL4aoEZrxJqOeh60l7W7UJRtiCeRiqjnU8QY6st1kXluyQsTfWzACv4RanRDrBKs98WcgXrKBUa/BsGi7YUUvT1qfE8aEoxM1MhErF42aTLCfWRx0FxxXk0vVlCMBPZiI1OCdzhkdu9TaMRHZlTeg4Y56m0PGNU1UCuTPtxBR8agKL9GjCT2Bt6yrQ58YFqAeuac39Hr8zpfoz5reIlUBItnWMpRFIsTvMfTiGc96jnKDyitmY0ae+jkmzaVXSjTqY1aU0jlAd5ArcO8xBh7QdKdaRxCrbeZyKV2it+P+rHJPq/W4wWOo9brdEUoyji+Qa3lDEVIYDSfoNa/eer8jd6U9bzPTDKs+axmFRX8myHWsZTJZBiTWcw6+wJWlDF8SzbKOqohXM9nZLOJpymGGJ14n4Oc4CBPmMvRbPbzGi3Mir2W2WQYS1jFCoYgniGsZQkZxmxW8z41EaM8Q1nNAbI5zJfMpCNiNWE1mWQYL7OOQQglWMJynifDM43VzPSiL2YlU8jwvMgqXkYK2/8Dty1cyE6USxYAAAAASUVORK5CYII="
+import { randomDutchAddress } from './dutchRandomNames.js'
 
-module.exports = {
-  makeAttestationPDF(data, qrCode) {
-    var doc = new jsPDF()
+export default {
+  makeAttestationPDF(data, qrCode, template, iframe) {
+    var doc = new jsPDF("p", "mm", "a4")
 
-    // Design the PDF
-    doc.addImage(logoData, 'PNG', margin, margin, 50, 33)
-    doc.setFontSize(16)
-    var messageNl = doc.splitTextToSize(`NL: Dit digitale waardepapier is cryptografisch beveiligd en kan door derden worden geverifieerd.`, (doc.internal.pageSize.width - margin - margin))
-    doc.text(margin, 80, messageNl)
-    var messageEn = doc.splitTextToSize(`EN: This digital certificate is secured cryptographically and can be verified by third parties.`, (doc.internal.pageSize.width - margin - margin))
-    doc.text(margin, 100, messageEn)
+    // render the svg element
+    doc.addImage(template, 0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'FAST')
+    doc.setFont("Arial");
+    doc.setFontType("normal");
+    doc.setFontSize(11);
 
-    // Add the QR code
-    doc.addImage(qrCode, 'png', doc.internal.pageSize.width - 100, doc.internal.pageSize.height - 100, 100, 100, undefined, 'FAST');
+    var address = randomDutchAddress()
+    // Set data to an array for serial processing
+    data = [data.username, data.username, data.birth_date, data.birth_city, "" + Math.round(1000000 + (Math.random() * 99999))]
+    for(var i = 0; i < 5; i++) {
+      doc.text(70, 104.5 + (i * 5.2), data[i]);
+    }
+    doc.text(70, 135, address);
+    doc.text(70, 155.5, new Date().toLocaleString())
 
-    // Download the file
-    var timestamp = new Date().toISOString()
-    doc.save('Gemeente Haarlem Digital Certificate ' + timestamp + '.pdf')
+    doc.addImage(qrCode, 'png', doc.internal.pageSize.width - 75, doc.internal.pageSize.height - 150, 65, 65, undefined, 'FAST');
+    if(typeof iframe !== 'undefined') {
+      var data = doc.output('datauristring');
+      iframe.src = data;
+    }
+    else {
+      doc.save('AttestatieClaim Haarlem.pdf')
+    }
   }
 }

@@ -42,6 +42,7 @@
         <input v-else type="button" @click="create()" value="Waardepapier aanmaken" />
       </div>
     </div>
+    <img ref="pdfTemplate" style="display: none;" src="@/assets/pdf_template.png" />
   </div>
 </template>
 
@@ -120,7 +121,7 @@ export default {
         ], function (error) {
           if (error) console.error('QR code', error)
           _this.state = 'done'
-          AttestationPdfMaker.makeAttestationPDF(JSON.parse(qrString), canvas.toDataURL('png'))
+          AttestationPdfMaker.makeAttestationPDF(JSON.parse(claimStr), canvas.toDataURL('png'), _this.$refs.pdfTemplate)
         })
       } catch (e) {
         this.state = 'error'
