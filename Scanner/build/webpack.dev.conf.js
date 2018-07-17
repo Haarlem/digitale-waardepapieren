@@ -44,7 +44,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DefinePlugin({
       "COMMITHASH": JSON.stringify(gitRevisionPlugin.commithash()),
-      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://field.carriota.com:443', 'https://node.tangle.works:443'])
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

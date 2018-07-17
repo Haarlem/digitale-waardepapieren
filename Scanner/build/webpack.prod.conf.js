@@ -37,7 +37,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DefinePlugin({
       "COMMITHASH": JSON.stringify(gitRevisionPlugin.commithash()),
-      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://nodes.iota.cafe'])
+      "IOTA_NODES": JSON.stringify(['https://xurux_iota.codebuffet.co', 'https://field.carriota.com:443', 'https://node.tangle.works:443'])
     }),
     // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
     new webpack.optimize.UglifyJsPlugin({
