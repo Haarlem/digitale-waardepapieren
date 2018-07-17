@@ -14,7 +14,7 @@
   "dependencies": {
     "browser-request": "^0.3.3",
     "curl.lib.js": "https://github.com/peterwilli/curl.lib.js.git#progress-bar",
-    "discipl-core": "https://github.com/discipl/core.git",
+    "discipl-core": "https://github.com/discipl/core.git#8e25377396250e45edce2556d2952ea716cab5bd",
     "iota.lib.js": "^0.4.7",
     "jspdf": "^1.3.5",
     "lz-string": "^1.4.4",

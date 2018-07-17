@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discipl-core": "https://github.com/discipl/core.git",
+    "discipl-core": "https://github.com/discipl/core.git#8e25377396250e45edce2556d2952ea716cab5bd",
     "iota.lib.js": "^0.4.7",
     "knex": "^0.14.2",
     "mam.client.js": "https://github.com/peterwilli/mam.client.js.git#temp-compile",
