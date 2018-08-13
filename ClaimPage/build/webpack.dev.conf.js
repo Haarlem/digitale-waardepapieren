@@ -50,7 +50,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DefinePlugin({
       "CLAIM_SERVER_URL": JSON.stringify("http://localhost:8082"),
-      "IOTA_NODES": JSON.stringify([/*'https://xurux_iota.codebuffet.co', */'https://field.carriota.com:443', 'https://node.tangle.works:443'])
+      "IOTA_NODES": JSON.stringify(['https://wallet2.iota.town:443', 'https://pow4.iota.community:443', 'https://nodes.thetangle.org:443', 'https://trinity.iota-tangle.io:14265', 'https://field.carriota.com:443', 'https://node.tangle.works:443'])
     })
   ]
 })
