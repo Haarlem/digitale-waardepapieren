@@ -16,7 +16,7 @@
     "iota.lib.js": "^0.4.7",
     "jsqr": "^0.2.2",
     "mam.client.js": "https://github.com/peterwilli/mam.client.js.git#vue-compat",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^3.0.1",
     "pug-loader": "^2.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
